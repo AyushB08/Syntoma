@@ -1,13 +1,15 @@
 
-
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const pool = require("./db");
 
 
+
+
 app.use(cors());
 app.use(express.json());
+
 
 app.post("/sign-up", async(req, res) => {
     try {
@@ -22,7 +24,7 @@ app.post("/sign-up", async(req, res) => {
         
 
         res.json(newUser.rows[0]);
-        //router.push(`/welcome?username=${encodeURIComponent(user.rows[0].username)}`);
+       
     }
     catch (error) {
 
@@ -35,11 +37,12 @@ app.post("/sign-in", async (req, res) => {
 
     
     const user = await pool.query("SELECT * FROM users WHERE email = $1 AND password = $2", [email, password]);
-
+    
     if (user.rows.length === 1) {
+        const username = user.rows[0].username;
+       
+        res.json({ username });
         
-        res.json({ message: "Sign-in successful" });
-        //router.push(`/welcome?username=${encodeURIComponent(data.username)}`);
     } else {
        
         res.status(401).json({ error: "Invalid username or password" });
@@ -49,6 +52,7 @@ app.post("/sign-in", async (req, res) => {
         res.status(500).json({ error: "Server Error" });
     }
 });
+
 
 app.listen(8000, () => {
     console.log("Server has started on port 8000");
