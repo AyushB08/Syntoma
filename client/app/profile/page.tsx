@@ -2,7 +2,7 @@
 
 import { useAuth } from "@/contexts/authContext";
 import { useRouter } from "next/navigation";
-import FileUploader from "@/components/FileUploader"; // Import the FileUploader component
+
 
 const Profile = () => {
   const router = useRouter();
@@ -21,7 +21,7 @@ const Profile = () => {
             Welcome to your profile,{" "}
             <span className="text-red-700">{authContext.user.username}</span>.
           </h1>
-          <FileUploader /> {/* Render the FileUploader component */}
+          
           <button
             onClick={handleLogout}
             className="px-5 py-2 bg-red-700 rounded-lg hover:bg-red-900"
