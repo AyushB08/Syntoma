@@ -31,6 +31,8 @@ app.post("/sign-up", async(req, res) => {
     }
 });
 
+
+
 app.post("/sign-in", async (req, res) => {
     try {
     const { email, password } = req.body;
@@ -47,6 +49,26 @@ app.post("/sign-in", async (req, res) => {
        
         res.status(401).json({ error: "Invalid username or password" });
     }
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "Server Error" });
+    }
+});
+
+app.post("/save-image", async (req, res) => {
+    try {
+        const { username, fileurl } = req.body;
+
+        if (!username || !fileurl) {
+            return res.status(400).json({ error: "Please provide username and file URL" });
+        }
+
+        const newImage = await pool.query(
+            "INSERT INTO images (username, fileurl) VALUES ($1, $2) RETURNING *",
+            [username, fileurl]
+        );
+
+        res.json(newImage.rows[0]);
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ error: "Server Error" });
