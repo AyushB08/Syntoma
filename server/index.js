@@ -55,7 +55,7 @@ app.post("/sign-in", async (req, res) => {
     }
 });
 
-app.post("/save-image", async (req, res) => {
+app.post("/save-image", (req, res) => {
     try {
         const { username, fileurl } = req.body;
 
@@ -63,7 +63,7 @@ app.post("/save-image", async (req, res) => {
             return res.status(400).json({ error: "Please provide username and file URL" });
         }
 
-        const newImage = await pool.query(
+        const newImage = pool.query(
             "INSERT INTO images (username, fileurl) VALUES ($1, $2) RETURNING *",
             [username, fileurl]
         );
