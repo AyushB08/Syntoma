@@ -8,6 +8,7 @@ const Navbar = () => {
     { href: "/sign-up", label: "Sign Up" },
     { href: "/profile", label: "Profile" },
     { href: "/upload", label: "Upload" },
+    { href: "/images", label: "Images"},
   ];
 
   return (

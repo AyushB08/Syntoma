@@ -67,6 +67,30 @@ app.post("/save-image", async (req, res) => {
     }
 });
 
+app.get("/get-images", async (req, res) => {
+    try {
+        const { username } = req.query;
+
+        if (!username) {
+            return res.status(400).json({ error: "Please provide a username" });
+        }
+
+        const images = await pool.query(
+            "SELECT * FROM images WHERE username = $1",
+            [username]
+        );
+
+        if (images.rows.length > 0) {
+            res.json(images.rows);
+        } else {
+            res.status(404).json({ error: "No images found for this user" });
+        }
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "Server Error" });
+    }
+});
+
 app.listen(8000, () => {
     console.log("Server has started on port 8000");
 });
