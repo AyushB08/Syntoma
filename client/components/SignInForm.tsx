@@ -39,7 +39,7 @@ export default function SignInForm() {
   };
 
   return (
-    <form className="w-1/2 h-auto rounded-lg bg-white p-6 shadow-lg" onSubmit={onSubmitForm}>
+    <form className="w-1/2 h-auto rounded-lg bg-white p-6 shadow-lg " onSubmit={onSubmitForm}>
       <h1 className="flex flex-row text-4xl mb-4 justify-center items-center text-black ">Company</h1>
       <div className="mb-4">
         <label htmlFor="email" className="text-black text-sm font-semibold mb-1">Email Address</label>
@@ -50,6 +50,7 @@ export default function SignInForm() {
         <input onChange={e => setPassword(e.target.value)} value={password} type="password" id="password" className="text-black w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-red-700" placeholder="Enter your password" />
       </div>
       <button type="submit" className="w-full bg-red-700 text-white py-2 rounded-lg hover:bg-red-900 focus:outline-none">Sign In</button>
+      <p className="mt-4 text-blue-700 flex  items-center">Sign Up &rarr;</p>
     </form>
   );
 }

@@ -25,7 +25,7 @@ export default function UploadDnD() {
             const json = JSON.stringify(uploadedFile);
             console.log(json);
 
-            // Make API call to save username and file URL to images database using fetch
+          
             try {
                 const response = await fetch("http://localhost:8000/save-image", {
                     method: "POST",
@@ -59,7 +59,7 @@ export default function UploadDnD() {
     ) : null;
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-start p-24">
+        <main className="flex min-h-screen flex-col items-center justify-start p-24 bg-gradient-to-b from-blue-100 to-white">
             <UploadDropzone<OurFileRouter>
                 endpoint="imageUploader"
                 onClientUploadComplete={handleUploadComplete}

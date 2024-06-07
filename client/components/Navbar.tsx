@@ -21,7 +21,7 @@ const Navbar = () => {
           
           
           {links.map((link) => (
-            <li key={link.href} className="link">
+            <li key={link.href} className="link text-black">
               <Link href={link.href}>{link.label}</Link>
             </li>
           ))}

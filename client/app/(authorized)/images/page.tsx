@@ -49,7 +49,7 @@ const ImagesPage = () => {
     return (
         <>
             <div className="h-[10vh]"></div> 
-            <div className="flex flex-col items-center justify-center w-screen">
+            <div className="flex flex-col items-center justify-center w-screen bg-gradient-to-b from-blue-100 to-white">
                 <h1 className="text-2xl font-bold mb-4">Images for {username}</h1>
                 <div className="flex flex-col items-center w-full">
                     {images.map((image) => (
