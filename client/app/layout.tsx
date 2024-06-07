@@ -1,14 +1,12 @@
 // src/app/layout.tsx
 
-
-
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { AuthProvider } from "@/contexts/authContext";
 
-const roboto = Roboto({ weight: "400", style: "normal", subsets: ["latin"] });
+const montserrat = Montserrat({ weight: "400", style: "normal", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,14 +15,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={roboto.className}>
-        <AuthProvider> 
-          <Navbar />
+      <body >
+        <AuthProvider>
           {children}
         </AuthProvider>
       </body>
