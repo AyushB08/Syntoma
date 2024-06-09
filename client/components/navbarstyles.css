@@ -4,6 +4,7 @@
 
 @layer components {
     .link:hover {
-        @apply text-red-700;
+        @apply text-blue-700 scale-105;
+
     }
 }
