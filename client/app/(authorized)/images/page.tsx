@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useAuth } from "@/contexts/authContext";
@@ -39,33 +40,51 @@ const ImagesPage = () => {
     }, [username]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="w-screen h-screen flex items-center justify-center bg-black text-white">Loading...</div>;
     }
 
     if (error) {
         return <div>Error: {error}</div>;
     }
 
+    const index = Math.ceil(images.length / 2);
+    const firstHalf = images.slice(0, index);
+    const secondHalf = images.slice(index);
+
     return (
-        <>
-            <div className="h-[10vh]"></div> 
-            <div className="flex flex-col items-center justify-center w-screen bg-gradient-to-b from-blue-100 to-white">
+        <div className="bg-black">
+            <div className="h-[10vh] bg-black"></div> 
+            
+            <div className="flex flex-col items-center justify-center w-screen bg-black pb-20 text-white">
+               
                 <h1 className="text-2xl font-bold mb-4">Images for {username}</h1>
-                <div className="flex flex-col items-center w-full">
-                    {images.map((image) => (
-                        <div key={image.id} className="w-1/3 mb-4">
-                            <img
-                                src={image.fileurl}
-                                alt="User Image"
-                                className="w-full h-auto object-cover rounded-lg shadow-lg border-white border"
-                            />
-                        </div>
-                    ))}
+                <div className="w-3/5 flex flex-row space-x-4"> 
+                    
+                    <div className="flex flex-col w-1/2 space-y-4">
+                        {firstHalf.map((image) => (
+                            <div key={image.id}>
+                                <img
+                                    src={image.fileurl}
+                                    alt="User Image"
+                                    className="w-full h-auto object-cover rounded-lg shadow-lg border-white border"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                    <div className="flex flex-col w-1/2 space-y-4">
+                        {secondHalf.map((image) => (
+                            <div key={image.id}>
+                                <img
+                                    src={image.fileurl}
+                                    alt="User Image"
+                                    className="w-full h-auto object-cover rounded-lg shadow-lg border-white border"
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
-
-        </>
-        
+        </div>
     );
 };
 

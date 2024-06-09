@@ -1,5 +1,3 @@
-// src/components/SignInForm.tsx
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/authContext";
@@ -8,11 +6,14 @@ import Link from "next/link";
 export default function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); // State for loading
   const router = useRouter();
   const authContext = useAuth();
 
   const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true); // Set loading state to true
+
     try {
       const body = { email, password };
       const response = await fetch("http://localhost:8000/sign-in", {
@@ -24,7 +25,6 @@ export default function SignInForm() {
       const data = await response.json();
 
       if (response.ok) {
-        
         console.log("USER: " + data.username);
         if (authContext) { 
           console.log(data);
@@ -36,6 +36,8 @@ export default function SignInForm() {
       }
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setLoading(false); // Set loading state back to false
     }
   };
 
@@ -50,7 +52,9 @@ export default function SignInForm() {
         <label htmlFor="password" className="text-black text-sm font-semibold mb-1">Password</label>
         <input onChange={e => setPassword(e.target.value)} value={password} type="password" id="password" className="text-black w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600" placeholder="Enter your password" />
       </div>
-      <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none">Sign In</button>
+      <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none">
+        {loading ? <div className="flex justify-center items-center"><div className="loader"></div>Loading...</div> : "Sign In"}
+      </button>
       <Link href="/sign-up" className="mt-4 text-blue-600 hover:text-black flex  items-center">Sign Up &rarr;</Link>
     </form>
   );
