@@ -1,8 +1,9 @@
+
 "use client";
 import { useAuth } from "@/contexts/authContext";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import Scan from "@/components/Scan";  // Adjust the import path according to your project structure
+import Scan from "@/components/Scan"; 
 import Link from "next/link";
 
 const ImagesPage = () => {
@@ -53,7 +54,7 @@ const ImagesPage = () => {
                 throw new Error("Failed to delete image");
             }
 
-            // Remove the deleted image from the state
+
             setImages(images.filter((image) => image.id !== imageId));
         } catch (error) {
             console.error(error);
@@ -62,7 +63,7 @@ const ImagesPage = () => {
     };
 
     const handleReport = (imageId) => {
-        // Implement the report functionality here
+       
         console.log(`Report image with ID: ${imageId}`);
     };
 
@@ -74,25 +75,57 @@ const ImagesPage = () => {
         return <div>Error: {error}</div>;
     }
 
-    const columnsCount = images.length === 1 ? 1 : 2;
-    const columnClass = `w-${Math.floor(12 / columnsCount)}/12`; // Calculate column width based on the number of columns
-
     return (
         <div className="bg-black min-h-screen min-w-screen">
-            <div className="h-[10vh] bg-black"></div> 
+            <div className="h-[10vh] bg-black"></div>
             <div className="flex flex-col items-center justify-center w-screen bg-black pb-20 text-white">
                 <h1 className="text-2xl font-bold mb-4">Images for {username}</h1>
-                <Link href="/upload" className="bg-blue-600 px-5 py-2 text-white rounded-lg mb-4">Upload Images Here</Link>
-                <div className={`w-3/5 grid grid-cols-${columnsCount} gap-4`}>
-                    {images.map((image) => (
-                        <div key={image.id} className={`flex flex-col ${columnClass} space-y-4`}>
-                            <Scan
-                                fileurl={image.fileurl}
-                                onDelete={() => handleDelete(image.id)}
-                                onReport={() => handleReport(image.id)}
-                            />
+                <Link href="/upload" className="bg-blue-600 px-5 py-2 text-white rounded-lg mb-4">
+                    Upload Images Here
+                </Link>
+                <div className="w-3/5 flex flex-row space-x-2">
+                  
+                    {images.length === 1 ? (
+                        <div className="flex flex-col w-full space-y-2">
+                            {images.map((image) => (
+                                <div key={image.id}>
+                                    <Scan
+                                        fileurl={image.fileurl}
+                                        onDelete={() => handleDelete(image.id)}
+                                        onReport={() => handleReport(image.id)}
+                                    />
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    ) : (
+                        <>
+                           
+                            <div className="flex flex-col w-1/2 space-y-2">
+                                {images.slice(0, Math.ceil(images.length / 2)).map((image) => (
+                                    <div key={image.id}>
+                                        <Scan
+                                            fileurl={image.fileurl}
+                                            onDelete={() => handleDelete(image.id)}
+                                            onReport={() => handleReport(image.id)}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                            
+                            <div className="flex flex-col w-1/2 space-y-2">
+                                {images.slice(Math.ceil(images.length / 2)).map((image) => (
+                                    <div key={image.id}>
+                                        <Scan
+                                            fileurl={image.fileurl}
+                                            onDelete={() => handleDelete(image.id)}
+                                            onReport={() => handleReport(image.id)}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    )}
+                   
                 </div>
             </div>
         </div>
