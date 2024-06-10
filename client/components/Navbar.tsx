@@ -14,8 +14,9 @@ const Navbar = () => {
   const authContext = useAuth();
 
   const handleLogout = () => {
-    authContext.logout();
-    router.push("/");
+    
+    router.push("/")
+    
   };
 
 
