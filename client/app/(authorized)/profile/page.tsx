@@ -19,14 +19,14 @@ const Profile = () => {
       
       {authContext && authContext.user && (
         <div className="w-3/5 h-full flex flex-col items-center justify-center">
-          <h1 className="text-8xl text-center mb-10">
+          <h1 className="text-8xl text-center mb-10 text-white">
             Welcome to your profile,{" "}
-            <span className="text-red-700">{authContext.user.username}</span>.
+            <span className="text-blue-500">{authContext.user.username}</span>.
           </h1>
           
           <button
             onClick={handleLogout}
-            className="px-5 py-2 bg-red-700 rounded-lg hover:bg-red-900"
+            className=" text-white px-5 py-2 bg-blue-600 rounded-lg hover:bg-blue-700"
           >
             Sign Out
           </button>

@@ -1,9 +1,9 @@
 "use client";
-
 import { useAuth } from "@/contexts/authContext";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Scan from "@/components/Scan";  // Adjust the import path according to your project structure
+import Link from "next/link";
 
 const ImagesPage = () => {
     const router = useRouter();
@@ -39,9 +39,26 @@ const ImagesPage = () => {
         fetchImages();
     }, [username]);
 
-    const handleDelete = (imageId) => {
-        // Implement the delete functionality here
-        console.log(`Delete image with ID: ${imageId}`);
+    const handleDelete = async (imageId) => {
+        try {
+            const response = await fetch("http://localhost:8000/delete-image", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ id: imageId }),
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to delete image");
+            }
+
+            // Remove the deleted image from the state
+            setImages(images.filter((image) => image.id !== imageId));
+        } catch (error) {
+            console.error(error);
+            setError(error.message);
+        }
     };
 
     const handleReport = (imageId) => {
@@ -57,36 +74,25 @@ const ImagesPage = () => {
         return <div>Error: {error}</div>;
     }
 
-    const index = Math.ceil(images.length / 2);
-    const firstHalf = images.slice(0, index);
-    const secondHalf = images.slice(index);
+    const columnsCount = images.length === 1 ? 1 : 2;
+    const columnClass = `w-${Math.floor(12 / columnsCount)}/12`; // Calculate column width based on the number of columns
 
     return (
-        <div className="bg-black">
+        <div className="bg-black min-h-screen min-w-screen">
             <div className="h-[10vh] bg-black"></div> 
             <div className="flex flex-col items-center justify-center w-screen bg-black pb-20 text-white">
                 <h1 className="text-2xl font-bold mb-4">Images for {username}</h1>
-                <div className="w-3/5 flex flex-row space-x-4">
-                    <div className="flex flex-col w-1/2 space-y-4">
-                        {firstHalf.map((image) => (
+                <Link href="/upload" className="bg-blue-600 px-5 py-2 text-white rounded-lg mb-4">Upload Images Here</Link>
+                <div className={`w-3/5 grid grid-cols-${columnsCount} gap-4`}>
+                    {images.map((image) => (
+                        <div key={image.id} className={`flex flex-col ${columnClass} space-y-4`}>
                             <Scan
-                                key={image.id}
                                 fileurl={image.fileurl}
                                 onDelete={() => handleDelete(image.id)}
                                 onReport={() => handleReport(image.id)}
                             />
-                        ))}
-                    </div>
-                    <div className="flex flex-col w-1/2 space-y-4">
-                        {secondHalf.map((image) => (
-                            <Scan
-                                key={image.id}
-                                fileurl={image.fileurl}
-                                onDelete={() => handleDelete(image.id)}
-                                onReport={() => handleReport(image.id)}
-                            />
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

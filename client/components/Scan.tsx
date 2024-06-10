@@ -47,7 +47,7 @@ export default function Scan({ fileurl, onDelete, onReport }) {
                             alt="User Image"
                             className="w-full h-auto object-cover rounded-lg shadow-lg mb-4"
                         />
-                        <p className="text-black">This is the image you want to report.</p>
+                        <p className="text-black">Here is your report</p>
                     </div>
                 </div>
             )}
