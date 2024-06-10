@@ -91,6 +91,32 @@ app.get("/get-images", async (req, res) => {
     }
 });
 
+app.delete("/delete-image", async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        if (!id) {
+            return res.status(400).json({ error: "Please provide the image ID to delete" });
+        }
+
+        const deleteImage = await pool.query(
+            "DELETE FROM images WHERE id = $1 RETURNING *",
+            [id]
+        );
+
+        if (deleteImage.rows.length === 0) {
+            return res.status(404).json({ error: "Image not found" });
+        }
+
+        res.json({ message: "Image deleted successfully", deletedImage: deleteImage.rows[0] });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "Server Error" });
+    }
+});
+
+
 app.listen(8000, () => {
     console.log("Server has started on port 8000");
 });
+
