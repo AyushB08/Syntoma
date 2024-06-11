@@ -9,6 +9,7 @@ const Navbar = () => {
     { href: "/profile", label: "Profile" },
     { href: "/upload", label: "Upload" },
     { href: "/images", label: "Images"},
+    {href: "/centers", label: "Centers"},
   ];
   const router = useRouter();
   const authContext = useAuth();
