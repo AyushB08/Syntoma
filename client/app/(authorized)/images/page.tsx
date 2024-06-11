@@ -51,7 +51,7 @@ const ImagesPage = () => {
             });
 
             if (!response.ok) {
-                throw new Error("Failed to delete image");
+                console.log("error");
             }
 
 
