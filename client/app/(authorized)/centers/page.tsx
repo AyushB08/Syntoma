@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useEffect, useState } from 'react';
@@ -8,6 +9,7 @@ const Centers = () => {
   const [medicalCenters, setMedicalCenters] = useState([]);
   const [fetching, setFetching] = useState(true);
   const [error, setError] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState(null); 
 
   useEffect(() => {
     const fetchMedicalCenters = () => {
@@ -15,6 +17,7 @@ const Centers = () => {
         navigator.geolocation.getCurrentPosition(
           async (position) => {
             const { latitude, longitude } = position.coords;
+            setCurrentLocation({ latitude, longitude });
             const center = new google.maps.LatLng(latitude, longitude);
             const map = new google.maps.Map(document.createElement('div'));
             const placesService = new google.maps.places.PlacesService(map);
@@ -77,7 +80,7 @@ const Centers = () => {
             <h1 className="mt-32 text-2xl font-bold mb-4 text-white">Nearest Medical Centers</h1>
             <ul className="mx-30 text-white w-1/2 pb-32">
               {medicalCenters.map((center, index) => (
-                <MedicalCenterItem key={index} center={center} />
+                <MedicalCenterItem key={index} center={center} currentLocation={currentLocation} />
               ))}
             </ul>
           </>
