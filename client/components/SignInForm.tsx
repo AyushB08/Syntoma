@@ -6,13 +6,13 @@ import Link from "next/link";
 export default function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false); // State for loading
+  const [loading, setLoading] = useState(false); 
   const router = useRouter();
   const authContext = useAuth();
 
   const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true); // Set loading state to true
+    setLoading(true); 
 
     try {
       const body = { email, password };
@@ -37,7 +37,7 @@ export default function SignInForm() {
     } catch (error) {
       console.error("Error:", error);
     } finally {
-      setLoading(false); // Set loading state back to false
+      setLoading(false); 
     }
   };
 

@@ -7,13 +7,13 @@ export default function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [loading, setLoading] = useState(false); // State for loading
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const authContext = useAuth();
 
   const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true); // Set loading state to true
+    setLoading(true); 
 
     try {
       const body = { username, email, password };
@@ -37,7 +37,7 @@ export default function SignUpForm() {
     } catch (error) {
       console.error("Error:", error);
     } finally {
-      setLoading(false); // Set loading state back to false
+      setLoading(false); 
     }
   };
 
