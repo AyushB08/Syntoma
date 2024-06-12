@@ -8,8 +8,8 @@ const Navbar = () => {
   const links = [
     { href: "/profile", label: "Profile" },
     { href: "/upload", label: "Upload" },
-    { href: "/images", label: "Images"},
-    {href: "/centers", label: "Centers"},
+    { href: "/scans", label: "Scans"},
+    {href: "/clinics", label: "Clinics"},
   ];
   const router = useRouter();
   const authContext = useAuth();
