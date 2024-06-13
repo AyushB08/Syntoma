@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import Script from 'next/script';
 import MedicalCenterItem from '@/components/MedicalCenterItem';
 
-const Centers = () => {
+const Clinics = () => {
   const [medicalCenters, setMedicalCenters] = useState([]);
   const [fetching, setFetching] = useState(true);
   const [error, setError] = useState(null);
@@ -77,7 +77,7 @@ const Centers = () => {
           <p className="text-red-500">{error}</p>
         ) : (
           <>
-            <h1 className="mt-32 text-2xl font-bold mb-4 text-white">Nearest Medical Centers</h1>
+            <h1 className="mt-32 text-2xl font-bold mb-4 text-white">Nearest Clinics</h1>
             <ul className="mx-30 text-white w-1/2 pb-32">
               {medicalCenters.map((center, index) => (
                 <MedicalCenterItem key={index} center={center} currentLocation={currentLocation} />
@@ -90,4 +90,4 @@ const Centers = () => {
   );
 };
 
-export default Centers;
+export default Clinics;

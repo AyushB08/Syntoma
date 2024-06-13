@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import Scan from "@/components/Scan"; 
 import Link from "next/link";
 
-const ImagesPage = () => {
+const ScansPage = () => {
     const router = useRouter();
     const authContext = useAuth();
     const [images, setImages] = useState([]);
@@ -79,9 +79,9 @@ const ImagesPage = () => {
         <div className="bg-black min-h-screen min-w-screen">
             <div className="h-[10vh] bg-black"></div>
             <div className="flex flex-col items-center justify-center w-screen bg-black pb-20 text-white">
-                <h1 className="text-2xl font-bold mb-4">Images for {username}</h1>
+                <h1 className="text-2xl font-bold mb-4">Scans for {username}</h1>
                 <Link href="/upload" className="bg-blue-600 px-5 py-2 text-white rounded-lg mb-4">
-                    Upload Images Here
+                    Upload Scans Here
                 </Link>
                 <div className="w-3/5 flex flex-row space-x-2">
                   
@@ -132,4 +132,4 @@ const ImagesPage = () => {
     );
 };
 
-export default ImagesPage;
+export default ScansPage;

@@ -11,8 +11,10 @@ export default function UploadDnD() {
         <div className="flex w-screen h-screen flex-col items-center justify-center p-24 bg-black text-white space-y-10">
             <p>Select a Region</p>
             <div className="flex flex-row">
-                <div className=" flex items-center justify-center  text-black">
-                    <Link href="/upload/xray" className=" bg-white rounded-lg p-10">Xray</Link>
+                <div className=" flex space-x-4 items-center justify-center  text-white">
+                    <Link href="/upload/xray" className=" bg-blue-600 rounded-lg px-5 py-2">Xray</Link>
+                    <Link href="/upload/xray" className=" bg-blue-600 rounded-lg px-5 py-2">Xray</Link>
+                    <Link href="/upload/xray" className=" bg-blue-600 rounded-lg px-5 py-2">Xray</Link>
                 </div>
             </div>
             
