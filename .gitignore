@@ -1,2 +1,4 @@
 server/.env.local
 .env.local
+/model/nih_xrays
+/model/logs
