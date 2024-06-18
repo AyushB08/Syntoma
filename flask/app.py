@@ -6,8 +6,10 @@ from PIL import Image
 from io import BytesIO
 from ultralytics import YOLO
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 knee_crop_model = YOLO("models/knee_crop.pt")
 knee_classification_model = YOLO("models/knee_classification.pt")
 

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Image from "next/image";
 
 const Diagnosis = ({ fileurl, modeltype }) => {
     const [loading, setLoading] = useState(false);
@@ -7,16 +6,17 @@ const Diagnosis = ({ fileurl, modeltype }) => {
     const handleViewResults = async () => {
         setLoading(true);
         try {
-            const response = await fetch(`http://localhost:5000/process-${modeltype}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ fileurl, modeltype }),
-            });
+          
+            const encodedFileUrl = encodeURIComponent(fileurl);
+            
+            const requestUrl = `http://127.0.0.1:5000/process_knee?url=${encodedFileUrl}`;
+
+            const response = await fetch(requestUrl);
+
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
+
             const data = await response.json();
             console.log('Results:', data);
         } catch (error) {
@@ -29,7 +29,7 @@ const Diagnosis = ({ fileurl, modeltype }) => {
     return (
         <div className="bg-black w-screen h-screen flex flex-col items-center justify-center">
             <p className="text-white">Here is your {modeltype} image</p>
-            <Image alt="Your Scan" src={fileurl} width={200} height={200} />
+            <img alt="Your Scan" src={fileurl} width={200} height={200} />
 
             <button
                 onClick={handleViewResults}
