@@ -1,3 +1,4 @@
+
 "use client";
 
 import "@uploadthing/react/styles.css";
@@ -5,7 +6,7 @@ import { UploadDropzone } from "@uploadthing/react";
 import { useState } from 'react';
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/authContext";
-import Diagnosis from "@/components/Diagnosis";
+import KneeDiagnosis from "@/components/KneeDiagnosis"; 
 
 export default function UploadDnD() {
     const router = useRouter();
@@ -43,7 +44,7 @@ export default function UploadDnD() {
     return (
         <main className="flex w-screen h-screen flex-col items-center justify-center p-24 bg-black text-white">
             {fileUrl ? (
-                <Diagnosis fileurl={fileUrl} modeltype="knee" />
+                <KneeDiagnosis fileurl={fileUrl}/>
             ) : (
                 <>
                     <p>Upload your image</p>

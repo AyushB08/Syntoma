@@ -14,7 +14,7 @@ export default function UploadDnD() {
                 <div className=" flex space-x-4 items-center justify-center  text-white">
                     <Link href="/upload/chest-xray" className=" bg-blue-600 rounded-lg px-5 py-2">Chest Xray</Link>
                     <Link href="/upload/knee-xray" className=" bg-blue-600 rounded-lg px-5 py-2">Knee Xray</Link>
-                    <Link href="/upload/knee-xray" className=" bg-blue-600 rounded-lg px-5 py-2">Xray</Link>
+                    
                 </div>
             </div>
             
