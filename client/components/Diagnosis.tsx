@@ -2,13 +2,13 @@ import { useState } from "react";
 
 const Diagnosis = ({ fileurl, modeltype }) => {
     const [loading, setLoading] = useState(false);
+    const [result, setResult] = useState(null);
+    const [largestConfidence, setLargestConfidence] = useState(null);
 
     const handleViewResults = async () => {
         setLoading(true);
         try {
-          
             const encodedFileUrl = encodeURIComponent(fileurl);
-            
             const requestUrl = `http://127.0.0.1:5000/process_knee?url=${encodedFileUrl}`;
 
             const response = await fetch(requestUrl);
@@ -19,6 +19,13 @@ const Diagnosis = ({ fileurl, modeltype }) => {
 
             const data = await response.json();
             console.log('Results:', data);
+
+            // Extracting the confidence values from the data
+            const confidences = Object.values(data);
+            const maxConfidence = Math.max(...confidences);
+
+            setResult(data);
+            setLargestConfidence(maxConfidence);
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
         } finally {
@@ -44,6 +51,13 @@ const Diagnosis = ({ fileurl, modeltype }) => {
                     </>
                 )}
             </button>
+
+            {result && (
+                <div className="mt-4 text-white">
+                    <h2>Largest Confidence Interval:</h2>
+                    <p className="text-xl font-bold">{largestConfidence}</p>
+                </div>
+            )}
         </div>
     );
 };
