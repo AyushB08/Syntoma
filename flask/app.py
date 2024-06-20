@@ -43,7 +43,7 @@ def process_knee_scan():
             final_results = knee_classification_model.predict(cropped_tensor)[0]
 
             final_predictions = list(map(lambda val: round(val, 3),final_results.probs.data.tolist()))
-            return jsonify({"normal": final_predictions[0], "doubtful": final_predictions[1], "mild": final_predictions[2], "moderate": final_predictions[3], "severe": final_predictions[4]})
+            return jsonify({"normal": final_predictions[0], "doubtful": final_predictions[1], "mild": final_predictions[2], "moderate": final_predictions[3], "severe": final_predictions[4]}), 200
 
         except Exception as e:
             print(e)
