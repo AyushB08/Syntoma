@@ -28,7 +28,7 @@ const ScansPage = () => {
                     throw new Error("Failed to fetch images");
                 }
                 const data = await response.json();
-                setImages(data);
+                setImages(data.reverse());
                 setLoading(false);
             } catch (error) {
                 console.error(error);
@@ -41,6 +41,7 @@ const ScansPage = () => {
     }, [username]);
 
     const handleDelete = async (imageId) => {
+        setImages(images.filter((image) => image.id !== imageId));
         try {
             const response = await fetch("http://localhost:8000/delete-image", {
                 method: "DELETE",
@@ -55,7 +56,7 @@ const ScansPage = () => {
             }
 
 
-            setImages(images.filter((image) => image.id !== imageId));
+            
         } catch (error) {
             console.error(error);
             setError(error.message);

@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useAuth } from "@/contexts/authContext";
+import Report from './Report';
 
 const KneeDiagnosis = ({ fileurl }) => {
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState(null);
     const [largestConfidence, setLargestConfidence] = useState(null);
     const [severityLevel, setSeverityLevel] = useState(null);
+    const authContext = useAuth();
+    const username = authContext.user.username;
 
     const handleViewResults = async () => {
         setLoading(true);
@@ -21,7 +25,6 @@ const KneeDiagnosis = ({ fileurl }) => {
             const data = await response.json();
             console.log('Results:', data);
 
-            // Extracting the confidence values from the data and finding the max confidence and its key
             let maxConfidence = -1;
             let maxConfidenceKey = null;
 
@@ -32,9 +35,36 @@ const KneeDiagnosis = ({ fileurl }) => {
                 }
             }
 
-            setResult(data);
+            // return jsonify({"healthy": final_predictions[0], "doubtful": final_predictions[1], "minimal": final_predictions[2], "moderate": final_predictions[3], "severe": final_predictions[4]}), 200
             setLargestConfidence(maxConfidence);
             setSeverityLevel(maxConfidenceKey);
+            console.log("DATA: " + JSON.stringify(data));
+            const confidenceData = {
+                confidence_1: data.healthy,
+                confidence_2: data.doubtful,
+                confidence_3: data.minimal,
+                confidence_4: data.moderate,
+                confidence_5: data.severe,
+                username: username,
+                fileurl: fileurl,
+                modeltype: "knee",
+            };
+
+            console.log("hello passed here1");
+
+            const postRequest = await fetch("http://localhost:8000/save-report", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(confidenceData),
+            });
+            setResult(data);
+            console.log("hello passed here");
+
+            if (!postRequest.ok) {
+                throw new Error('Failed to update confidence values');
+            }
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
         } finally {
@@ -62,12 +92,11 @@ const KneeDiagnosis = ({ fileurl }) => {
             </button>
 
             {result && (
-                <div className="mt-4 text-white">
-                    <h2>Diagnosis Result:</h2>
-                    <p className="text-xl">
-                        Our model has detected this case has a {largestConfidence * 100}% chance of being a <span className="text-red-700 font-bold capitalize">{severityLevel}</span> case of this disease.
-                    </p>
-                </div>
+                <Report
+                fileurl={fileurl}
+                modeltype="knee"
+                
+                />
             )}
         </div>
     );

@@ -116,7 +116,59 @@ app.delete("/delete-image", async (req, res) => {
 });
 
 
+app.post("/save-report", async (req, res) => {
+    try {
+        console.log("passed here 0");
+        const { confidence_1, confidence_2, confidence_3, confidence_4, confidence_5, username, fileurl, modeltype } = req.body;
+        console.log("passed here 2");
+        
+        console.log("passed here 3");
+        const newReport = await pool.query(
+            "INSERT INTO reports (confidence_1, confidence_2, confidence_3, confidence_4, confidence_5, username, fileurl, modeltype) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+            [confidence_1, confidence_2, confidence_3, confidence_4, confidence_5, username, fileurl, modeltype]
+        );
+        console.log("passed here 4");
+
+        res.json(newReport.rows[0]);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "Server Error" });
+    }
+});
+
+
+app.get('/get-largest-confidence', async (req, res) => {
+    const { fileurl } = req.query;
+
+    try {
+        const result = await pool.query(
+            `SELECT confidence_1, confidence_2, confidence_3, confidence_4, confidence_5 FROM reports WHERE fileurl = $1`,
+            [fileurl]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: 'Report not found' });
+        }
+
+        const confidences = result.rows[0];
+        let maxConfidence = -1;
+        let maxConfidenceKey = null;
+
+        for (const [key, value] of Object.entries(confidences)) {
+            if (value > maxConfidence) {
+                maxConfidence = value;
+                maxConfidenceKey = key;
+            }
+        }
+
+        res.json({ maxConfidence, maxConfidenceKey });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+
 app.listen(8000, () => {
     console.log("Server has started on port 8000");
 });
-
