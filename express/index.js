@@ -92,26 +92,47 @@ app.get("/get-images", async (req, res) => {
 });
 
 app.delete("/delete-image", async (req, res) => {
+    const { fileurl } = req.body;
+
+    if (!fileurl) {
+        return res.status(400).json({ error: "Provide the file URL to delete" });
+    }
+
+    const client = await pool.connect();
     try {
-        const { id } = req.body;
+        await client.query('BEGIN');
 
-        if (!id) {
-            return res.status(400).json({ error: "Please provide the image ID to delete" });
-        }
-
-        const deleteImage = await pool.query(
-            "DELETE FROM images WHERE id = $1 RETURNING *",
-            [id]
+        const deleteImage = await client.query(
+            "DELETE FROM images WHERE fileurl = $1 RETURNING *",
+            [fileurl]
         );
+
+        const deleteReport = await client.query(
+            "DELETE FROM reports WHERE fileurl = $1 RETURNING *",
+            [fileurl]
+        );
+
+        await client.query('COMMIT');
 
         if (deleteImage.rows.length === 0) {
             return res.status(404).json({ error: "Image not found" });
         }
 
-        res.json({ message: "Image deleted successfully", deletedImage: deleteImage.rows[0] });
+        if (deleteReport.rows.length === 0) {
+            return res.status(404).json({ error: "Report not found" });
+        }
+
+        res.json({
+            message: "Image and report deleted successfully",
+            deletedImage: deleteImage.rows[0],
+            deletedReport: deleteReport.rows[0]
+        });
     } catch (error) {
-        console.error(error.message);
-        res.status(500).json({ error: "Server Error" });
+        await client.query('ROLLBACK');
+        console.error('Error executing delete:', error);
+        res.status(500).json({ error: "Internal server error" });
+    } finally {
+        client.release();
     }
 });
 

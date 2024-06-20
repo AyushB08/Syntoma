@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faFile, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Report from "./Report";
-export default function Scan({ fileurl, onDelete, onReport }) {
+export default function Scan({ fileurl, onDelete }) {
     const [showReportCard, setShowReportCard] = useState(false);
 
     const handleReportClick = () => {

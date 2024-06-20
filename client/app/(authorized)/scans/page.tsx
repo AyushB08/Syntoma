@@ -40,15 +40,15 @@ const ScansPage = () => {
         fetchImages();
     }, [username]);
 
-    const handleDelete = async (imageId) => {
-        setImages(images.filter((image) => image.id !== imageId));
+    const handleDelete = async (fileurl) => {
+        setImages(images.filter((image) => image.fileurl !== fileurl));
         try {
             const response = await fetch("http://localhost:8000/delete-image", {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ id: imageId }),
+                body: JSON.stringify({ fileurl: fileurl }),
             });
 
             if (!response.ok) {
@@ -63,10 +63,7 @@ const ScansPage = () => {
         }
     };
 
-    const handleReport = (imageId) => {
-       
-        console.log(`Report image with ID: ${imageId}`);
-    };
+    
 
     if (loading) {
         return <div className="w-screen h-screen flex items-center justify-center bg-black text-white">Loading...</div>;
@@ -92,8 +89,8 @@ const ScansPage = () => {
                                 <div key={image.id}>
                                     <Scan
                                         fileurl={image.fileurl}
-                                        onDelete={() => handleDelete(image.id)}
-                                        onReport={() => handleReport(image.id)}
+                                        onDelete={() => handleDelete(image.fileurl)}
+                                       
                                     />
                                 </div>
                             ))}
@@ -107,7 +104,7 @@ const ScansPage = () => {
                                         <Scan
                                             fileurl={image.fileurl}
                                             onDelete={() => handleDelete(image.id)}
-                                            onReport={() => handleReport(image.id)}
+                                          
                                         />
                                     </div>
                                 ))}
@@ -119,7 +116,7 @@ const ScansPage = () => {
                                         <Scan
                                             fileurl={image.fileurl}
                                             onDelete={() => handleDelete(image.id)}
-                                            onReport={() => handleReport(image.id)}
+                                           
                                         />
                                     </div>
                                 ))}
