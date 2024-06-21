@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-
+import convertConfInterval from '@/utils/convertConfInterval';
 const Report = ({ fileurl, modeltype }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [largestConfidence, setLargestConfidence] = useState(null);
-    const [confidenceKey, setConfidenceKey] = useState(null);
+    const [confidenceKey, setConfidenceKey] = useState("");
 
     useEffect(() => {
         const fetchLargestConfidence = async () => {
@@ -15,7 +15,8 @@ const Report = ({ fileurl, modeltype }) => {
                 }
                 const data = await response.json();
                 setLargestConfidence(data.maxConfidence);
-                setConfidenceKey(data.maxConfidenceKey);
+                setConfidenceKey(convertConfInterval(data.maxConfidenceKey, "knee"));
+                console.log(data.maxConfidenceKey + " TEST");
             } catch (err) {
                 setError(err.message);
             } finally {
