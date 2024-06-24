@@ -1,12 +1,10 @@
 // src/app/layout.tsx
 
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { AuthProvider } from "@/contexts/authContext";
 
-const montserrat = Montserrat({ weight: "400", style: "normal", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body >
+      <body>
         <AuthProvider>
           {children}
         </AuthProvider>

@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 @layer components {
-    .link:hover {
-        @apply text-blue-700 scale-105;
+    .link {
+        transition: background-color 0.3s ease;
+    }
 
+    .link:hover {
+        background-color: #2c3e50;
     }
 }

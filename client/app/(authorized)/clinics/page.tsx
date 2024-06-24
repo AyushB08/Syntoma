@@ -26,7 +26,7 @@ const Clinics = () => {
             placesService.nearbySearch(
               {
                 location: center,
-                radius: 5000,
+                radius: 20000,
                 type: 'hospital',
                 keyword: keyword
               },
@@ -79,7 +79,7 @@ const Clinics = () => {
 
   return (
     <div className="bg-black min-w-screen min-h-screen flex flex-col items-center justify-center">
-      <div className="mt-10 mb-4 flex space-x-4 text-white">
+      <div className="mt-40 mb-4 flex space-x-4 text-white">
         <label className="flex items-center">
           <input
             type="checkbox"
