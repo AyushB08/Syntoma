@@ -5,6 +5,7 @@
 @layer components {
     .link {
         transition: background-color 0.3s ease;
+        @apply no-underline;
     }
 
     .link:hover {

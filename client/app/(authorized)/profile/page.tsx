@@ -17,9 +17,10 @@ const Profile = () => {
       {authContext && authContext.user && (
         <div className="w-3/5 h-full flex flex-col items-center justify-center">
           <h1 className="text-8xl text-center mb-10 text-white">
-            Welcome to your profile,{" "}
-            <span className="text-blue-500">{authContext.user.username}</span>.
+            Hello {" "}
+            <span className="text-blue-500">{authContext.user.username}</span>!
           </h1>
+          <h2>Ready to upload? Click here.</h2>
           
           <button
             onClick={handleLogout}

@@ -66,7 +66,7 @@ const ScansPage = () => {
     
 
     if (loading) {
-        return <div className="w-screen h-screen flex items-center justify-center bg-black text-white">Loading...</div>;
+        return <div className="w-screen h-screen flex items-center justify-center bg-gradient-to-r from-gray-800 to-gray-900 text-white">Loading...</div>;
     }
 
     if (error) {
@@ -74,9 +74,9 @@ const ScansPage = () => {
     }
 
     return (
-        <div className="bg-black min-h-screen min-w-screen">
-            <div className="h-[10vh] bg-black"></div>
-            <div className="flex flex-col items-center justify-center w-screen bg-black pb-20 text-white">
+        <div className=" min-h-screen min-w-screen bg-gradient-to-r from-gray-800 to-gray-900">
+            <div className="h-[10vh] "></div>
+            <div className="flex flex-col items-center justify-center w-screen  pb-20 text-white">
                 <h1 className="text-2xl font-bold mb-4">Scans for {username}</h1>
                 <Link href="/upload" className="bg-blue-600 px-5 py-2 text-white rounded-lg mb-4">
                     Upload Scans Here

@@ -2,6 +2,17 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/authContext";
 import Link from "next/link";
+import LogoIcon from "./LogoIcon";
+
+import { Montserrat } from "next/font/google";
+import { Roboto } from 'next/font/google';
+import { Poppins } from "next/font/google";
+
+
+const roboto = Roboto({ weight: '400', style: 'normal', subsets: ['latin'] });
+const montserrat = Montserrat({ weight: "300", style: "normal", subsets: ["latin"] });
+const poppins = Poppins({ weight: "200", style: "normal", subsets: ["latin"] });
+
 
 export default function SignUpForm() {
   const [email, setEmail] = useState("");
@@ -43,7 +54,11 @@ export default function SignUpForm() {
 
   return (
     <form className="w-1/2 h-auto rounded-lg bg-white p-6 shadow-lg" onSubmit={onSubmitForm}>
-      <h1 className="text-blue-700 font-bold flex flex-row text-4xl mb-4 justify-center items-center ">Vital</h1>
+      <div className="flex flex-row items-center justify-center space-x-1">
+          <LogoIcon fill="#000000" width="30px" height="30px" className=""/>
+          <Link href="/" className={`${montserrat.className} tracking-tighter text-4xl text-blue-700 `}>Syntoma</Link>
+
+        </div>
       <div className="mb-4">
         <label htmlFor="email" className="text-black text-sm font-semibold mb-1">Email Address</label>
         <input onChange={e => setEmail(e.target.value)} value={email} type="email" id="email" className="text-black w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600" placeholder="Enter your email" />
