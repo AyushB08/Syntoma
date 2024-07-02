@@ -57,13 +57,32 @@ export default function SignInForm() {
 
   return (
     <>
+      <style jsx global>{`
+        input:-webkit-autofill {
+          -webkit-box-shadow: 0 0 0 1000px white inset;
+          -webkit-text-fill-color: black;
+        }
+
+        input:-webkit-autofill:focus {
+          -webkit-box-shadow: 0 0 0 1000px white inset;
+          -webkit-text-fill-color: black;
+        }
+
+        input:-webkit-autofill:hover {
+          -webkit-box-shadow: 0 0 0 1000px white inset;
+          -webkit-text-fill-color: black;
+        }
+
+        input:-webkit-autofill:active {
+          -webkit-box-shadow: 0 0 0 1000px white inset;
+          -webkit-text-fill-color: black;
+        }
+      `}</style>
       <form className="w-1/2 h-auto rounded-lg bg-white p-6 shadow-lg" onSubmit={onSubmitForm}>
         <div className="flex flex-row items-center justify-center space-x-1">
           <LogoIcon fill="#000000" width="30px" height="30px" className=""/>
           <Link href="/" className={`${montserrat.className} tracking-tighter text-4xl text-blue-700 `}>Syntoma</Link>
-
         </div>
-        
         
         <div className="mb-4">
           <label htmlFor="email" className="text-black text-sm font-semibold mb-1">Email Address</label>

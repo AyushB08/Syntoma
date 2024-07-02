@@ -14,6 +14,18 @@ app.post("/sign-up", async (req, res) => {
             return res.status(400).json({ error: "Please provide email, username, and password" });
         }
 
+        // Check if email already exists
+        const emailCheck = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+        if (emailCheck.rows.length > 0) {
+            return res.status(400).json({ error: "Email already in use" });
+        }
+
+        // Check if username already exists
+        const usernameCheck = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
+        if (usernameCheck.rows.length > 0) {
+            return res.status(400).json({ error: "Username already in use" });
+        }
+
         const newUser = await pool.query(
             "INSERT INTO users (email, username, password) VALUES ($1, $2, $3) RETURNING *", 
             [email, username, password]
