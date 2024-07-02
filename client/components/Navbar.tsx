@@ -11,7 +11,7 @@ import { Poppins } from "next/font/google";
 import LogoIcon from "./LogoIcon";
 
 const roboto = Roboto({ weight: '400', style: 'normal', subsets: ['latin'] });
-const montserrat = Montserrat({ weight: "300", style: "normal", subsets: ["latin"] });
+const montserrat = Montserrat({ weight: "500", style: "normal", subsets: ["latin"] });
 const poppins = Poppins({ weight: "200", style: "normal", subsets: ["latin"] });
 
 const Navbar = () => {
