@@ -9,6 +9,7 @@ import { Montserrat } from "next/font/google";
 import { Roboto } from 'next/font/google';
 import { Poppins } from "next/font/google";
 import LogoIcon from "./LogoIcon";
+import AuthLoadingScreen from "./AuthLoadingScreen";
 
 const roboto = Roboto({ weight: '400', style: 'normal', subsets: ['latin'] });
 const montserrat = Montserrat({ weight: "500", style: "normal", subsets: ["latin"] });
@@ -54,6 +55,12 @@ export default function SignInForm() {
       setLoading(false);
     }
   };
+
+  if (loading) {
+    return ( 
+      <AuthLoadingScreen/>
+    )
+  }
 
   return (
     <>

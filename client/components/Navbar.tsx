@@ -34,7 +34,7 @@ const Navbar = () => {
       <div className="flex-1">
         <div className="flex btn btn-ghost">
           <LogoIcon fill="#fff" width="25px" height="25px" className=""/>
-          <Link href="/" className={`${montserrat.className} tracking-tighter text-xl text-blue-300 `}>Syntoma</Link>
+          <Link href="/" className={`${montserrat.className} tracking-tighter text-xl text-blue-600 `}>Syntoma</Link>
           
         </div>
         <p className={` text-sm bg-gray-400 text-white rounded-lg px-2 ${montserrat.className}`}>BETA</p>
