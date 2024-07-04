@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <>
       <HomeNavbar />
-      <div className="h-screen w-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-900 to-blue-600">
+      <div className="h-screen w-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-800 to-blue-600">
         <div className="w-4/5 h-2/3 items-center justify-center flex flex-row ">
           <div className="w-3/5 h-full justify-center flex flex-col">
             <h1 className="text-white text-6xl ml-20 pb-2">Revolutionize Healthcare with Instant Results to Medical Scans</h1>

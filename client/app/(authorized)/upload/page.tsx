@@ -8,7 +8,7 @@ import {useRouter } from "next/navigation";
 export default function UploadDnD() {
     
     return (
-        <div className="flex w-screen h-screen flex-col items-center justify-center p-24 bg-gradient-to-r from-gray-800 to-gray-900 text-white space-y-10">
+        <div className="flex w-screen h-screen flex-col items-center justify-center p-24   bg-gradient-to-r from-blue-800 to-blue-600 text-white space-y-10">
             <p>Select a Region</p>
             <div className="flex flex-row">
                 <div className=" flex space-x-4 items-center justify-center  text-white">

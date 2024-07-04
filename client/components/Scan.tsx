@@ -1,7 +1,9 @@
+
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faFile, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Report from "./Report";
+
 export default function Scan({ fileurl, onDelete }) {
     const [showReportCard, setShowReportCard] = useState(false);
 
@@ -22,7 +24,7 @@ export default function Scan({ fileurl, onDelete }) {
             />
             <button
                 className="absolute top-2 right-2 bg-blue-500 text-white px-2 rounded"
-                onClick={onDelete}
+                onClick={() => onDelete(fileurl)} // Pass fileurl to onDelete
             >
                 <FontAwesomeIcon icon={faTrash} />
             </button>
@@ -48,15 +50,8 @@ export default function Scan({ fileurl, onDelete }) {
                             className="w-full h-auto object-cover rounded-lg shadow-lg mb-4"
                         />
                         <p className="text-black">Here is your report</p>
-                        <Report
-                            fileurl={fileurl}
-                            modeltype="knee"
-                            
-                        />
+                        <Report fileurl={fileurl} modeltype="knee" />
                     </div>
-                    
-
-                    
                 </div>
             )}
         </div>

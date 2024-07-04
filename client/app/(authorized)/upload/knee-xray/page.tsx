@@ -42,7 +42,7 @@ export default function UploadDnD() {
     };
 
     return (
-        <main className="bg-gradient-to-r from-gray-800 to-gray-900 flex w-screen h-screen flex-col items-center justify-center p-24  text-white">
+        <main className=" bg-gradient-to-r from-blue-800 to-blue-600 flex w-screen h-screen flex-col items-center justify-center p-24  text-white">
             {fileUrl ? (
                 <KneeDiagnosis fileurl={fileUrl}/>
             ) : (

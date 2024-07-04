@@ -16,10 +16,11 @@ const KneeDiagnosis = ({ fileurl }) => {
             setLoading(true);
             try {
                 const encodedFileUrl = encodeURIComponent(fileurl);
+                console.log("api1");
                 const requestUrl = `http://127.0.0.1:5000/process_knee?url=${encodedFileUrl}`;
-
+                console.log(requestUrl);
                 const response = await fetch(requestUrl);
-
+                console.log("api2");
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -43,10 +44,8 @@ const KneeDiagnosis = ({ fileurl }) => {
                 console.log("DATA: " + JSON.stringify(data));
                 const confidenceData = {
                     confidence_1: data.healthy,
-                    confidence_2: data.doubtful,
-                    confidence_3: data.minimal,
-                    confidence_4: data.moderate,
-                    confidence_5: data.severe,
+                    confidence_2: data.moderate,
+                    confidence_3: data.severe,
                     username: username,
                     fileurl: fileurl,
                     modeltype: "knee",
@@ -78,7 +77,7 @@ const KneeDiagnosis = ({ fileurl }) => {
     }, [fileurl, username]);
 
     return (
-        <div className="bg-black w-screen h-screen flex flex-col items-center justify-center">
+        <div className=" w-screen h-screen flex flex-col items-center justify-center">
             <p className="text-white">Here is your knee image</p>
             <img alt="Your Scan" src={fileurl} width={200} height={200} />
 
