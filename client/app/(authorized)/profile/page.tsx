@@ -9,6 +9,7 @@ import { Poppins } from "next/font/google";
 import { Red_Hat_Display } from "next/font/google";
 import { Open_Sans } from "next/font/google";
 import LogoIcon from "@/components/LogoIcon";
+import Link from "next/link";
 
 
 const roboto = Roboto({ weight: '100', style: 'normal', subsets: ['latin'] });
@@ -49,8 +50,9 @@ const Profile = () => {
           </h2>
           
           <div className="flex space-x-4 items-center justify-center">
-            <button className={`${montserrat.className} text-blue-600 px-8 py-2 bg-white rounded-full`}>Learn More</button>
-            <button className={`${montserrat.className} text-blue-600 px-12 py-2 bg-white rounded-full`}>Upload</button>
+            <Link href="/upload" className={`${montserrat.className} text-blue-600 px-12 py-2 bg-white rounded-full transition-colors duration-300 hover:bg-blue-600 hover:text-white`}>Upload</Link>
+            <Link href="/about" className={`${montserrat.className} text-blue-600 px-8 py-2 bg-white rounded-full transition-colors duration-300 hover:bg-blue-600 hover:text-white`}>Learn More</Link>
+            
           </div>
         </div>
       )}
