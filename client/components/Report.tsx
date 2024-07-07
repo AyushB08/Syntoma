@@ -48,7 +48,7 @@ const Report = ({ fileurl, modeltype }) => {
     });
 
     return (
-        <div className="flex items-center gap-6 p-6 rounded-lg shadow-lg bg-white text-blue-600">
+        <div className="flex items-center gap-6 p-6 rounded-lg shadow-lg bg-white text-black">
             <div className="flex-shrink-0">
                 <Image src={fileurl} alt="X-Ray Image" width={230} height={230} className="rounded-lg" />
             </div>
@@ -56,16 +56,16 @@ const Report = ({ fileurl, modeltype }) => {
                 <div>
                     <h3 className="text-xl font-bold">Knee X-Ray Analysis</h3>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground text-blue-700">
                     <CalendarDaysIcon className="w-4 h-4" />
                     <span>Scanned on {formattedDate}</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground text-blue-700">
                     <PercentIcon className="w-4 h-4" />
                     <span>Confidence: {largestConfidence * 100}%</span>
                 </div>
                 <p className="text-muted-foreground">
-                    <span className={`items-center justify-center text-center font-bold text-2xl ${confidenceKey === "Healthy" ? "text-green-600" : confidenceKey === "Moderate" ? "text-yellow-600" : "text-red-600"}`}>
+                    <span className={`items-center justify-center text-center font-bold text-2xl ${confidenceKey === "Healthy" ? "text-green-600" : confidenceKey === "Moderate" ? "text-yellow-400" : "text-red-600"}`}>
                         {confidenceKey}
                     </span>
                 </p>

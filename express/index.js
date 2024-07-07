@@ -199,7 +199,38 @@ app.get('/get-largest-confidence', async (req, res) => {
         console.error(err.message);
         res.status(500).json({ message: 'Server error' });
     }
+
+    
 });
+
+app.get('/get-confidence-intervals', async (req, res) => {
+    const { fileurl } = req.query;
+
+    try {
+        const result = await pool.query(
+            `SELECT confidence_1, confidence_2, confidence_3, created_at FROM reports WHERE fileurl = $1`,
+            [fileurl]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: 'Report not found' });
+        }
+
+        const confidences = result.rows[0];
+        const response = {
+            confidence_1: confidences.confidence_1,
+            confidence_2: confidences.confidence_2,
+            confidence_3: confidences.confidence_3,
+            created_at: confidences.created_at
+        };
+
+        res.json(response);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 
 
 

@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/authContext";
 import Report from './Report';
 
-const KneeDiagnosis = ({ fileurl }) => {
+const KneeDiagnosis = ({ fileurl, onReportSaved }) => {
     const [loading, setLoading] = useState(true);
     const [result, setResult] = useState(null);
     const [largestConfidence, setLargestConfidence] = useState(null);
@@ -16,17 +15,14 @@ const KneeDiagnosis = ({ fileurl }) => {
             setLoading(true);
             try {
                 const encodedFileUrl = encodeURIComponent(fileurl);
-                console.log("api1");
                 const requestUrl = `http://127.0.0.1:5000/process_knee?url=${encodedFileUrl}`;
-                console.log(requestUrl);
                 const response = await fetch(requestUrl);
-                console.log("api2");
+
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
 
                 const data = await response.json();
-                console.log('Results:', data);
 
                 let maxConfidence = -1;
                 let maxConfidenceKey = null;
@@ -38,10 +34,9 @@ const KneeDiagnosis = ({ fileurl }) => {
                     }
                 }
 
-                // return jsonify({"healthy": final_predictions[0], "doubtful": final_predictions[1], "minimal": final_predictions[2], "moderate": final_predictions[3], "severe": final_predictions[4]}), 200
                 setLargestConfidence(maxConfidence);
                 setSeverityLevel(maxConfidenceKey);
-                console.log("DATA: " + JSON.stringify(data));
+
                 const confidenceData = {
                     confidence_1: data.healthy,
                     confidence_2: data.moderate,
@@ -51,8 +46,6 @@ const KneeDiagnosis = ({ fileurl }) => {
                     modeltype: "knee",
                 };
 
-                console.log("hello passed here1");
-
                 const postRequest = await fetch("http://localhost:8000/save-report", {
                     method: 'POST',
                     headers: {
@@ -61,11 +54,13 @@ const KneeDiagnosis = ({ fileurl }) => {
                     body: JSON.stringify(confidenceData),
                 });
                 setResult(data);
-                console.log("hello passed here");
 
                 if (!postRequest.ok) {
                     throw new Error('Failed to update confidence values');
                 }
+
+                // Notify that the report has been saved
+                onReportSaved();
             } catch (error) {
                 console.error('There was a problem with the fetch operation:', error);
             } finally {
@@ -74,16 +69,13 @@ const KneeDiagnosis = ({ fileurl }) => {
         };
 
         handleViewResults();
-    }, [fileurl, username]);
+    }, [fileurl, username, onReportSaved]);
 
     return (
-        <div className=" w-screen h-screen flex flex-col items-center justify-center">
-            
-
+        <div className=" flex flex-col items-center justify-center">
             {loading ? (
                 <button className="flex flex-col items-center justify-center text-white bg-blue-600 px-3 py-2 mt-4 rounded-lg">
                     <h1 className="text-xl font-bold">Processing...</h1>
-                    
                 </button>
             ) : (
                 result && (
