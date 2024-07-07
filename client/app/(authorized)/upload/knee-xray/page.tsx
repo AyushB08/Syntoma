@@ -15,6 +15,7 @@ import { Poppins } from "next/font/google";
 import { Red_Hat_Display } from "next/font/google";
 import { Open_Sans } from "next/font/google";
 import ModelDescription from '@/components/ModelDescription';
+import Card from "@/components/Card";
 
 
 const roboto = Roboto({ weight: '100', style: 'normal', subsets: ['latin'] });
@@ -62,7 +63,10 @@ export default function UploadDnD() {
     return (
         <main className=" bg-gradient-to-r from-blue-800 to-blue-600 flex w-screen h-screen flex-col items-center justify-center p-24  text-white">
             {fileUrl ? (
+                <>
                 <KneeDiagnosis fileurl={fileUrl}/>
+                <Card/>
+                </>
             ) : (
                 <>
                     <div className="w-screen h-screen flex flex-row items-center justify-center ">

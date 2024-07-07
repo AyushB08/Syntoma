@@ -5,7 +5,7 @@ const Report = ({ fileurl, modeltype }) => {
     const [error, setError] = useState(null);
     const [largestConfidence, setLargestConfidence] = useState(null);
     const [confidenceKey, setConfidenceKey] = useState("");
-
+    
     useEffect(() => {
         const fetchLargestConfidence = async () => {
             try {

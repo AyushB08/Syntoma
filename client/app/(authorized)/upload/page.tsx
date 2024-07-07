@@ -19,13 +19,16 @@ const poppins = Poppins({ weight: "800", style: "normal", subsets: ["latin"] });
 const redHatDisplay = Red_Hat_Display({ weight: '400', style: 'normal', subsets: ['latin'] });
 const openSans = Open_Sans({ weight: '400', style: 'normal', subsets: ['latin'] });
 
-
+import Card
+ from '@/components/Card';
 export default function UploadDnD() {
     
     return (
+        
         <div className="flex w-screen h-screen flex-row items-center justify-center px-20  bg-gradient-to-r from-blue-800 to-blue-600 text-white ">
             <div className="flex flex-row w-full h-screen items-center justify-center text-center ">
                 <div className="w-1/2 flex flex-col ">
+                    
 
                     <h1 className={`${montserrat.className} text-7xl`}>Select a Model</h1>
                     <h2 className={`${roboto.className} text-2xl`}>We are actively adding new models to our website</h2>
