@@ -175,7 +175,7 @@ app.get('/get-largest-confidence', async (req, res) => {
 
     try {
         const result = await pool.query(
-            `SELECT confidence_1, confidence_2, confidence_3, confidence_4, confidence_5 FROM reports WHERE fileurl = $1`,
+            `SELECT confidence_1, confidence_2, confidence_3, confidence_4, confidence_5, created_at FROM reports WHERE fileurl = $1`,
             [fileurl]
         );
 
@@ -188,18 +188,19 @@ app.get('/get-largest-confidence', async (req, res) => {
         let maxConfidenceKey = null;
 
         for (const [key, value] of Object.entries(confidences)) {
-            if (value > maxConfidence) {
+            if (key.startsWith('confidence') && value > maxConfidence) {
                 maxConfidence = value;
                 maxConfidenceKey = key;
             }
         }
 
-        res.json({ maxConfidence, maxConfidenceKey });
+        res.json({ maxConfidence, maxConfidenceKey, created_at: confidences.created_at });
     } catch (err) {
         console.error(err.message);
         res.status(500).json({ message: 'Server error' });
     }
 });
+
 
 
 app.listen(8000, () => {
