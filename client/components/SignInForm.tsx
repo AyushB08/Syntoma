@@ -108,7 +108,7 @@ export default function SignInForm() {
       {/* Popup for displaying "Invalid credentials" */}
       {showPopup && (
         <Popup open={showPopup} closeOnDocumentClick onClose={() => setShowPopup(false)}>
-          <div className="p-4 bg-red-500 text-white">Invalid credentials</div>
+          <div className={`${montserrat.className} py-6  bg-red-700 text-white text-4xl rounded-lg text-center`}>Invalid credentials</div>
         </Popup>
       )}
     </>

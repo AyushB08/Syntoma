@@ -34,7 +34,7 @@ const Report = ({ fileurl, modeltype }) => {
     }, [fileurl]);
 
     if (loading) {
-        return <p className="text-blue-500">Loading...</p>;
+        return <p className="text-blue-500">bruh</p>;
     }
 
     if (error) {

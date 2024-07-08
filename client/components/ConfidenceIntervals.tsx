@@ -35,7 +35,7 @@ const ConfidenceIntervals = ({ fileurl, reportSaved }) => {
     }, [fileurl, reportSaved]);
 
     if (loading) {
-        return <p className="text-blue-500">Loading...</p>;
+        return <p className="text-blue-500"></p>;
     }
 
     if (error) {

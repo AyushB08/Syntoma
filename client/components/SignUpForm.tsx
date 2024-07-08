@@ -148,7 +148,7 @@ export default function SignUpForm() {
       {/* Popup for displaying errors */}
       {showPopup && (
         <Popup open={showPopup} closeOnDocumentClick onClose={() => setShowPopup(false)}>
-          <div className="p-4 bg-red-500 text-white">{popupMessage}</div>
+          <div className={`${montserrat.className} py-6  bg-red-700 text-white text-4xl rounded-lg text-center`}>{popupMessage}</div>
         </Popup>
       )}
     </>
