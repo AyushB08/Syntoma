@@ -17,7 +17,7 @@ const openSans = Open_Sans({ weight: '400', style: 'normal', subsets: ['latin'] 
 
 const ModelDescription = ({ src, text, link }) => {
   return (
-    <Link href={link} className="flex flex-col items-center bg-white w-44 text-blue-700 rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:bg-gray-200">
+    <Link href={link} className="flex flex-col items-center bg-white w-44 text-black rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:bg-gray-200">
       <div className="w-full">
         <Image src={src} alt="model image" width={400} height={400} layout="responsive" />
       </div>

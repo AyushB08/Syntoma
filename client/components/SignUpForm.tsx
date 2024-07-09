@@ -101,7 +101,7 @@ export default function SignUpForm() {
       `}</style>
       <form className="w-1/2 h-auto rounded-lg bg-white p-6 shadow-lg" onSubmit={onSubmitForm}>
         <div className="flex flex-row items-center justify-center space-x-1">
-          <LogoIcon fill="#000000" width="30px" height="30px" className="" />
+          <LogoIcon fill="#000000" width="25px" height="25px" className=""/>
           <Link href="/" className={`${montserrat.className} tracking-tighter text-4xl text-blue-700`}>Syntoma</Link>
         </div>
         <div className="mb-4">
