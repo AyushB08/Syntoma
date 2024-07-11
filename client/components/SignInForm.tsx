@@ -86,7 +86,7 @@ export default function SignInForm() {
         }
       `}</style>
       <form className="w-1/2 h-auto rounded-lg bg-white p-6 shadow-lg" onSubmit={onSubmitForm}>
-        <div className="flex flex-row items-center justify-center space-x-1">
+        <div className="flex flex-row items-center justify-center space-x-1 mb-4">
           <LogoIcon fill="#000000" width="25px" height="25px" className=""/>
           <Link href="/" className={`${montserrat.className} text-blue-700 tracking-tighter text-4xl k `}>Syntoma</Link>
         </div>
