@@ -63,7 +63,7 @@ export default function UploadDnD() {
     };
 
     return (
-        <main className="bg-gradient-to-r from-blue-800 to-blue-600 flex w-screen h-screen flex-col items-center justify-center text-white">
+        <main className="bg-gradient-to-r from-blue-900 to-blue-700 flex w-screen h-screen flex-col items-center justify-center text-white">
             {fileUrl ? (
                 <>
                     <div className="flex flex-row items-center justify-center space-x-4">

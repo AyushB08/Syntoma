@@ -69,7 +69,7 @@ const ScansPage = () => {
     }
 
     return (
-        <div className="min-h-screen min-w-screen bg-gradient-to-r from-blue-800 to-blue-600">
+        <div className="min-h-screen min-w-screen bg-gradient-to-r from-blue-900 to-blue-700">
             <div className="h-[10vh]"></div>
             <div className="flex flex-col items-center justify-center w-screen pb-20 text-white">
                 <h1 className="text-2xl font-bold mb-4">Scans for {username}</h1>

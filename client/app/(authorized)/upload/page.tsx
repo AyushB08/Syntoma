@@ -25,7 +25,7 @@ export default function UploadDnD() {
     
     return (
         
-        <div className="flex w-screen h-screen flex-row items-center justify-center px-20  bg-gradient-to-r from-blue-800 to-blue-600 text-white ">
+        <div className="flex w-screen h-screen flex-row items-center justify-center px-20  bg-gradient-to-r from-blue-900 to-blue-700 text-white ">
             <div className="flex flex-row w-full h-screen items-center justify-center text-center ">
                 <div className="w-1/2 flex flex-col ">
                     

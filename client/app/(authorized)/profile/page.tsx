@@ -28,7 +28,7 @@ const Profile = () => {
   };
 
   return (
-    <div className={`w-screen h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-800 to-blue-600`}>
+    <div className={`w-screen h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-900 to-blue-700`}>
       {authContext && authContext.user && (
         <div className="w-3/5 h-full flex flex-col items-center justify-center space-y-8">
           <div className="flex flex-col items-center justify-center">
