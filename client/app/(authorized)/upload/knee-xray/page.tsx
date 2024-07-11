@@ -83,8 +83,8 @@ export default function UploadDnD() {
                             <div className="justify-normal items-start text-start">
 
                                 <p className="text-gray-300 mt-8">File format: PNG (.png) or JPEG (.jpg, .jpeg)</p>
-                                <p className="text-gray-300 ">Image size: Minimum 1024x1024 pixels</p>
-                                <p className="text-gray-300 ">File size: Maximum 10MB per image</p>
+                                <p className="text-gray-300 ">Image size: Minimum 128x128 pixels</p>
+                                <p className="text-gray-300 ">File size: Maximum 4MB per image</p>
                             </div>
                             
                             

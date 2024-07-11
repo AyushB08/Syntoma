@@ -1,10 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faFile, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Report from "./Report";
 
 export default function Scan({ fileurl, onDelete }) {
     const [showReportCard, setShowReportCard] = useState(false);
+    const [scanInfo, setScanInfo] = useState({});
+
+    useEffect(() => {
+        fetchScanInfo();
+    }, []);
+
+    const fetchScanInfo = async () => {
+        try {
+            console.log(`localhost:8000/get-scan-info?fileurl=${encodeURIComponent(fileurl)}`)
+            const response = await fetch(`http://localhost:8000/get-scan-info?fileurl=${encodeURIComponent(fileurl)}`);
+            if (!response.ok) {
+                throw new Error("Failed to fetch scan information");
+            }
+            const data = await response.json();
+            setScanInfo(data);
+        } catch (error) {
+            console.error("Error fetching scan information:", error);
+        }
+    };
 
     const handleReportClick = () => {
         setShowReportCard(!showReportCard);
@@ -16,39 +35,43 @@ export default function Scan({ fileurl, onDelete }) {
 
     return (
         <div className="relative">
-            <img
-                src={fileurl}
-                alt="User Image"
-                className="w-full h-auto object-cover rounded-lg shadow-lg "
-            />
-            <button
-                className="absolute top-2 right-2 bg-blue-500 text-white px-2 rounded"
-                onClick={() => onDelete(fileurl)} // Pass fileurl to onDelete
-            >
-                <FontAwesomeIcon icon={faTrash} />
-            </button>
-            <button
-                className="absolute top-10 right-2 bg-blue-500 text-white px-2 rounded"
-                onClick={handleReportClick}
-            >
-                <FontAwesomeIcon icon={faFile} />
-            </button>
+            <div className="bg-white rounded-lg shadow-lg p-4">
+                <img
+                    src={fileurl}
+                    alt="User Image"
+                    className="w-full h-auto object-cover rounded-lg shadow-lg"
+                />
+                <p className="text-left mt-2 mb-1 text-sm font-bold text-black">
+                    {scanInfo.modeltype ? `${scanInfo.modeltype} X-Ray - ${new Date(scanInfo.created_at).toLocaleDateString()}` : "Loading..."}
+                </p>
+
+                <div className="mt-2">
+                    <button
+                        className="bg-blue-700 text-white w-full py-2 rounded mb-2"
+                        onClick={handleReportClick}
+                    >
+                        View Scan
+                    </button>
+                    <button
+                        className="bg-red-600 text-white w-full py-2 rounded"
+                        onClick={() => onDelete(fileurl)}
+                    >
+                        <FontAwesomeIcon icon={faTrash} /> Delete
+                    </button>
+                </div>
+            </div>
 
             {showReportCard && (
-                <div className="fixed inset-0 bg-white bg-opacity-90 flex items-center justify-center z-50">
-                    <div className="relative  rounded-lg shadow-lg">
+                <div className="fixed inset-0 bg-gray-400 bg-opacity-90 flex items-center justify-center z-50 shadow-3xl">
+                    <div className="relative rounded-lg  p-6 bg-white bg-opacity-100">
                         <button
-                            className="absolute top-2 right-2 bg-red-500 text-white px-2 rounded"
+                            className="absolute top-4 right-4  text-black px-2 rounded"
                             onClick={handleCloseReportCard}
                         >
                             <FontAwesomeIcon icon={faTimes} />
                         </button>
                         
-                        <Report fileurl={fileurl} modeltype="knee" />
-
-                        
-
-                        
+                        <Report fileurl={fileurl} modeltype={scanInfo.modeltype} />
                     </div>
                 </div>
             )}

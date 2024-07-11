@@ -234,6 +234,30 @@ app.get('/get-confidence-intervals', async (req, res) => {
 
 
 
+app.get('/get-scan-info', async (req, res) => {
+    const { fileurl } = req.query;
+
+    try {
+        const result = await pool.query(
+            `SELECT modeltype, created_at FROM reports WHERE fileurl = $1`,
+            [fileurl]
+        );
+
+        
+
+        const scanInfo = result.rows[0];
+        res.json(scanInfo);
+    } catch (err) {
+           
+           
+        console.error(err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+
+
+
 app.listen(8000, () => {
     console.log("Server has started on port 8000");
 });

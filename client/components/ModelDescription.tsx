@@ -21,7 +21,7 @@ const ModelDescription = ({ src, text, link }) => {
       <div className="w-full">
         <Image src={src} alt="model image" width={400} height={400} layout="responsive" />
       </div>
-      <div className={`w-full py-2 ${redHatDisplay.className} text-center`}>
+      <div className={`w-full py-2 text-sm text-center`}>
         <p className="px-4">{text}</p>
       </div>
     </Link>

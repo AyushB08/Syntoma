@@ -48,13 +48,13 @@ const Report = ({ fileurl, modeltype }) => {
     });
 
     return (
-        <div className="flex items-center gap-6 p-6 rounded-lg shadow-lg bg-white text-black">
+        <div className="flex items-center gap-6 p-6 rounded-lg  bg-white text-black">
             <div className="flex-shrink-0">
                 <Image src={fileurl} alt="X-Ray Image" width={230} height={230} className="rounded-lg" />
             </div>
             <div className="flex-1 space-y-2">
                 <div>
-                    <h3 className="text-xl font-bold">Knee X-Ray Analysis</h3>
+                    <h3 className="text-xl font-bold">{modeltype} X-Ray Analysis</h3>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground text-blue-700">
                     <CalendarDaysIcon className="w-4 h-4" />

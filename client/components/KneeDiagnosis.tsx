@@ -43,7 +43,7 @@ const KneeDiagnosis = ({ fileurl, onReportSaved }) => {
                     confidence_3: data.severe,
                     username: username,
                     fileurl: fileurl,
-                    modeltype: "knee",
+                    modeltype: "Knee",
                 };
 
                 const postRequest = await fetch("http://localhost:8000/save-report", {
@@ -79,7 +79,7 @@ const KneeDiagnosis = ({ fileurl, onReportSaved }) => {
                 </button>
             ) : (
                 result && (
-                    <Report fileurl={fileurl} modeltype="knee" />
+                    <Report fileurl={fileurl} modeltype="Knee" />
                 )
             )}
         </div>
