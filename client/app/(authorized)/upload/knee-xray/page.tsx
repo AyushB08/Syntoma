@@ -29,7 +29,7 @@ export default function UploadDnD() {
     const [fileUrl, setFileUrl] = useState<string | null>(null);
     const [reportSaved, setReportSaved] = useState(false);
 
-    const imgWidth = 200;
+    const imgWidth = 250;
 
     const handleUploadComplete = async (res) => {
         if (res && res.length > 0) {
@@ -77,13 +77,23 @@ export default function UploadDnD() {
             ) : (
                 <>
                     <div className="w-screen h-screen flex flex-row items-center justify-center">
-                        <div className="w-1/2 mx-10 flex flex-col items-center justify-center text-center">
-                            <h1 className={`${montserrat.className} text-6xl`}>Acceptable X-Rays</h1>
-                            <h2 className={`${roboto.className} text-2xl`}>Please ensure your scans follow this format</h2>
-                            <div className="items-center justify-center space-x-3 flex flex-row mt-6">
-                                <Image className="rounded-lg" src="/images/knee-sample.png" alt="image" height={imgWidth} width={imgWidth} />
-                                <Image className="rounded-lg" src="/images/knee-sample.png" alt="image" height={imgWidth} width={imgWidth} />
+                        <div className="w-1/2 mx-10 flex flex-col items-center justify-center text-center  ">
+                            <h1 className={`${montserrat.className} text-3xl`}>Acceptable X-Rays</h1>
+                            <h2 className={`${roboto.className} text-xl`}>Please ensure your scans follow this format</h2>
+                            <div className="justify-normal items-start text-start">
+
+                                <p className="text-gray-300 mt-8">File format: PNG (.png) or JPEG (.jpg, .jpeg)</p>
+                                <p className="text-gray-300 ">Image size: Minimum 1024x1024 pixels</p>
+                                <p className="text-gray-300 ">File size: Maximum 10MB per image</p>
                             </div>
+                            
+                            
+                            
+                            <div className="space-x-6 flex flex-row mt-8 items-center justify-center text-center">
+                                <Image className="rounded-xl shadow-2xl transform transition-transform duration-300 hover:scale-105" src="/images/knee-sample.png" alt="image" height={imgWidth} width={imgWidth} />
+                                <Image className="rounded-xl shadow-2xl transform transition-transform duration-300 hover:scale-105 " src="/images/knee-sample.png" alt="image" height={imgWidth} width={imgWidth} />
+                            </div>
+
                         </div>
                         <div className="w-1/2 h-full flex flex-col items-center justify-center">
                             <UploadDropzone
@@ -92,7 +102,7 @@ export default function UploadDnD() {
                                 onUploadError={(error: Error) => {
                                     alert(`ERROR! ${error.message}`);
                                 }}
-                                className="bg-white h-3/5 w-4/5"
+                                className="bg-white h-3/5 w-4/5 transform transition-transform duration-300  hover:bg-gray-200"
                             />
                         </div>
                     </div>

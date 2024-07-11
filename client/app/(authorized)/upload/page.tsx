@@ -35,7 +35,7 @@ export default function UploadDnD() {
 
 
                 </div>
-                <div className="w-1/2 flex flex-col space-y-6 items-center justify-center">
+                <div className="w-1/2 flex flex-col space-y-10 items-center justify-center">
                     
 
                 <div className="flex flex-row items-center justify-center space-x-10">

@@ -36,14 +36,19 @@ export default function Scan({ fileurl, onDelete }) {
 
             {showReportCard && (
                 <div className="fixed inset-0 bg-white bg-opacity-90 flex items-center justify-center z-50">
-                    <div className="relative bg-black p-1 rounded-lg shadow-lg">
+                    <div className="relative  rounded-lg shadow-lg">
                         <button
                             className="absolute top-2 right-2 bg-red-500 text-white px-2 rounded"
                             onClick={handleCloseReportCard}
                         >
                             <FontAwesomeIcon icon={faTimes} />
                         </button>
+                        
                         <Report fileurl={fileurl} modeltype="knee" />
+
+                        
+
+                        
                     </div>
                 </div>
             )}

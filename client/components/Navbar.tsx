@@ -9,7 +9,7 @@ import { Roboto } from 'next/font/google';
 import { Montserrat } from "next/font/google";
 
 const roboto = Roboto({ weight: '500', style: 'normal', subsets: ['latin'] });
-const montserrat = Montserrat({ weight: "500", style: "normal", subsets: ["latin"] });
+const montserrat = Montserrat({ weight: "600", style: "normal", subsets: ["latin"] });
 
 const HomeNavbar = () => {
   const links = [

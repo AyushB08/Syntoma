@@ -12,7 +12,7 @@ import LogoIcon from "./LogoIcon";
 import AuthLoadingScreen from "./AuthLoadingScreen";
 
 const roboto = Roboto({ weight: '400', style: 'normal', subsets: ['latin'] });
-const montserrat = Montserrat({ weight: "500", style: "normal", subsets: ["latin"] });
+const montserrat = Montserrat({ weight: "600", style: "normal", subsets: ["latin"] });
 const poppins = Poppins({ weight: "200", style: "normal", subsets: ["latin"] });
 
 export default function SignInForm() {
