@@ -13,7 +13,7 @@ const MedicalCenterItem = ({ center, currentLocation }) => {
   );
 
   return (
-    <li className="border border-gray-200 rounded p-4 mb-4">
+    <div className="border border-gray-200 rounded p-4 mb-4 bg-white">
       <h3 className="text-lg font-semibold">{center.name}</h3>
       <p className="text-blue-500">{center.vicinity}</p>
       <p className="text-gray-500">Distance: {distance} km</p>
@@ -25,7 +25,7 @@ const MedicalCenterItem = ({ center, currentLocation }) => {
       >
         View on Google Maps
       </a>
-    </li>
+    </div>
   );
 };
 
