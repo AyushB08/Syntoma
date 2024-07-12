@@ -4,3 +4,4 @@ server/.env.local
 /model/logs
 /flask/temp.py
 /flask/models/knee_model/
+/flask/models/xray_class_weights.best.hdf5
