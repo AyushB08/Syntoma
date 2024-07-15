@@ -42,18 +42,18 @@ export default function Scan({ fileurl, onDelete }) {
                     className="w-full h-auto object-cover rounded-lg shadow-lg"
                 />
                 <p className="text-left mt-2 mb-1 text-sm font-bold text-black">
-                    {scanInfo.modeltype ? `${scanInfo.modeltype} X-Ray - ${new Date(scanInfo.created_at).toLocaleDateString()}` : "Loading..."}
+                    {scanInfo.modeltype ? `${scanInfo.modeltype} X-Ray - ${new Date(scanInfo.created_at).toLocaleDateString()}` : "Fetching Date..."}
                 </p>
 
                 <div className="mt-2">
                     <button
-                        className="bg-blue-700 text-white w-full py-2 rounded mb-2"
+                        className="bg-blue-700 hover:bg-blue-800 text-white w-full py-2 rounded mb-2 transition duration-300"
                         onClick={handleReportClick}
                     >
                         View Scan
                     </button>
                     <button
-                        className="bg-red-600 text-white w-full py-2 rounded"
+                        className="bg-red-600 hover:bg-red-700 text-white w-full py-2 rounded transition duration-300"
                         onClick={() => onDelete(fileurl)}
                     >
                         <FontAwesomeIcon icon={faTrash} /> Delete
@@ -65,7 +65,7 @@ export default function Scan({ fileurl, onDelete }) {
                 <div className="fixed inset-0 bg-gray-400 bg-opacity-90 flex items-center justify-center z-50 shadow-3xl">
                     <div className="relative rounded-lg p-6 bg-white bg-opacity-100">
                         <button
-                            className="absolute top-4 right-4 text-black px-2 rounded"
+                            className="absolute top-4 right-4 text-black hover:text-blue-700 transition duration-300"
                             onClick={handleCloseReportCard}
                         >
                             <FontAwesomeIcon icon={faTimes} />

@@ -40,16 +40,16 @@ export default function UploadDnD() {
 
                 <div className="flex flex-row items-center justify-center space-x-10">
 
-                    <ModelDescription link="/upload/knee-xray" src="/images/knee-sample.png" text="Knee Osteoarthritis Severity Detection"/>
-                    <ModelDescription link="/upload/chest-xray" src="/images/knee-sample.png" text="Knee Osteoarthritis Severity Detection"/>
+                    <ModelDescription link="/upload/knee-xray" src="/images/knee1.png" text="Knee Osteoarthritis Severity Detection"/>
+                    <ModelDescription link="/upload/chest-xray" src="/images/chest1.png" text="Chest X-Ray Disease Detection"/>
 
                     </div>
                     
 
                 
                     <div className="flex flex-row items-center justify-center space-x-10">
-                    <ModelDescription link="/upload/knee-xray" src="/images/knee-sample.png" text="Knee Osteoarthritis Severity Detection"/>
-                    <ModelDescription link="/upload/knee-xray" src="/images/knee-sample.png" text="Knee Osteoarthritis Severity Detection"/>
+                    <ModelDescription link="/upload/knee-xray" src="/images/knee-sample.png" text="Coming Soon"/>
+                    <ModelDescription link="/upload/knee-xray" src="/images/knee-sample.png" text="Coming Soon"/>
                     </div>
                     
 

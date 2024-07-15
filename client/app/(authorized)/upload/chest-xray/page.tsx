@@ -91,8 +91,8 @@ export default function UploadDnD() {
                             
                             
                             <div className="space-x-6 flex flex-row mt-8 items-center justify-center text-center">
-                                <Image className="rounded-xl shadow-2xl transform transition-transform duration-300 hover:scale-105" src="/images/knee-sample.png" alt="image" height={imgWidth} width={imgWidth} />
-                                <Image className="rounded-xl shadow-2xl transform transition-transform duration-300 hover:scale-105 " src="/images/knee-sample.png" alt="image" height={imgWidth} width={imgWidth} />
+                                <Image className="rounded-xl shadow-2xl transform transition-transform duration-300 hover:scale-105" src="/images/chest1.png" alt="image" height={imgWidth} width={imgWidth} />
+                                <Image className="rounded-xl shadow-2xl transform transition-transform duration-300 hover:scale-105 " src="/images/chest2.png" alt="image" height={imgWidth} width={imgWidth} />
                             </div>
 
                         </div>

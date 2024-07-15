@@ -74,9 +74,9 @@ const KneeDiagnosis = ({ fileurl, onReportSaved }) => {
     return (
         <div className=" flex flex-col items-center justify-center">
             {loading ? (
-                <button className="flex flex-col items-center justify-center text-white bg-blue-600 px-3 py-2 mt-4 rounded-lg">
-                    <h1 className="text-xl font-bold">Processing...</h1>
-                </button>
+                <div className="mt-4">
+                    <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                </div>
             ) : (
                 result && (
                     <Report fileurl={fileurl} modeltype="Knee" />

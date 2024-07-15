@@ -43,10 +43,13 @@ const ConfidenceIntervals = ({ fileurl, reportSaved }) => {
         fetchConfidences();
     }, [fileurl, reportSaved]);
 
+ 
     if (loading) {
-        return <p className="text-blue-500">Loading...</p>;
+        return <div>
+            
+        </div>
     }
-
+    
     if (error) {
         return <p className="text-red-500">Error: {error}</p>;
     }

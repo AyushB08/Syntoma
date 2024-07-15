@@ -63,7 +63,9 @@ const ScansPage = () => {
     };
 
     if (loading) {
-        return <div className="w-screen h-screen flex items-center justify-center bg-gradient-to-r from-blue-800 to-blue-600 text-white">Loading...</div>;
+        return <div className="w-screen h-screen flex items-center justify-center bg-gradient-to-r from-blue-900 to-blue-700 text-white"><div className="mt-4">
+        <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+    </div></div>;
     }
 
     if (error) {
