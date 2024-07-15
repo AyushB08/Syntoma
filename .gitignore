@@ -4,4 +4,5 @@ server/.env.local
 /model/logs
 /ml-backend/temp.py
 /ml-backend/models/knee_model/
+/ml-backend/env/
 /ml-backend/models/xray_class_weights.best.hdf5

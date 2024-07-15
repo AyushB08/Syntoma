@@ -46,7 +46,7 @@ const KneeDiagnosis = ({ fileurl, onReportSaved }) => {
                     modeltype: "Knee",
                 };
 
-                const postRequest = await fetch("http://localhost:8000/save-report", {
+                const postRequest = await fetch("http://localhost:8000/save-knee-report", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

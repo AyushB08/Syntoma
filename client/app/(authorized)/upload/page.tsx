@@ -41,7 +41,7 @@ export default function UploadDnD() {
                 <div className="flex flex-row items-center justify-center space-x-10">
 
                     <ModelDescription link="/upload/knee-xray" src="/images/knee-sample.png" text="Knee Osteoarthritis Severity Detection"/>
-                    <ModelDescription link="/upload/knee-xray" src="/images/knee-sample.png" text="Knee Osteoarthritis Severity Detection"/>
+                    <ModelDescription link="/upload/chest-xray" src="/images/knee-sample.png" text="Knee Osteoarthritis Severity Detection"/>
 
                     </div>
                     

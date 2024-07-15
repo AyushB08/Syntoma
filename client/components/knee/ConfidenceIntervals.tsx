@@ -14,7 +14,7 @@ const ConfidenceIntervals = ({ fileurl, reportSaved }) => {
 
         const fetchConfidences = async () => {
             try {
-                const url = `http://localhost:8000/get-confidence-intervals?fileurl=${encodeURIComponent(fileurl)}`;
+                const url = `http://localhost:8000/get-knee-confidence-intervals?fileurl=${encodeURIComponent(fileurl)}`;
                 const response = await fetch(url);
 
                 const data = await response.json();

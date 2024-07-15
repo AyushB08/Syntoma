@@ -5,7 +5,7 @@ import { UploadDropzone } from "@uploadthing/react";
 import { useState } from 'react';
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/authContext";
-import KneeDiagnosis from "@/components/KneeDiagnosis";
+import KneeDiagnosis from "@/components/knee/KneeDiagnosis";
 import Image from "next/image";
 
 import { Montserrat } from "next/font/google";
@@ -14,8 +14,8 @@ import { Poppins } from "next/font/google";
 import { Red_Hat_Display } from "next/font/google";
 import { Open_Sans } from "next/font/google";
 import ModelDescription from '@/components/ModelDescription';
-import Card from "@/components/Card";
-import ConfidenceIntervals from "@/components/ConfidenceIntervals";
+
+import ConfidenceIntervals from "@/components/knee/ConfidenceIntervals";
 
 const roboto = Roboto({ weight: '100', style: 'normal', subsets: ['latin'] });
 const montserrat = Montserrat({ weight: "500", style: "normal", subsets: ["latin"] });
