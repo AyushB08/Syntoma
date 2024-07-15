@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/authContext";
 import Report from './Report';
 
-const KneeDiagnosis = ({ fileurl, onReportSaved }) => {
+const ChestDiagnosis = ({ fileurl, onReportSaved }) => {
     const [loading, setLoading] = useState(true);
     const [result, setResult] = useState(null);
     const [largestConfidence, setLargestConfidence] = useState(null);
@@ -15,7 +15,7 @@ const KneeDiagnosis = ({ fileurl, onReportSaved }) => {
             setLoading(true);
             try {
                 const encodedFileUrl = encodeURIComponent(fileurl);
-                const requestUrl = `http://127.0.0.1:5000/process_knee?url=${encodedFileUrl}`;
+                const requestUrl = `http://127.0.0.1:5000/process_chest?url=${encodedFileUrl}`;
                 const response = await fetch(requestUrl);
 
                 if (!response.ok) {
@@ -23,43 +23,44 @@ const KneeDiagnosis = ({ fileurl, onReportSaved }) => {
                 }
 
                 const data = await response.json();
+                console.log("MAIN DATA: " +  JSON.stringify(data)); 
+                console.log("DATA PLUERAL: " + data.PleuralThickening);
 
-                let maxConfidence = -1;
-                let maxConfidenceKey = null;
-
-                for (const [key, value] of Object.entries(data)) {
-                    if (value > maxConfidence) {
-                        maxConfidence = value;
-                        maxConfidenceKey = key;
-                    }
-                }
-
-                setLargestConfidence(maxConfidence);
-                setSeverityLevel(maxConfidenceKey);
-
+               
                 const confidenceData = {
-                    confidence_1: data.healthy,
-                    confidence_2: data.moderate,
-                    confidence_3: data.severe,
+                    confidence_1: data.Atelectasis,
+                    confidence_2: data.Cardiomegaly,
+                    confidence_3: data.Consolidation,
+                    confidence_4: data.Edema,
+                    confidence_5: data.Effusion,
+                    confidence_6: data.Emphysema,
+                    confidence_7: data.Fibrosis,
+                    confidence_8: data.Infiltration,
+                    confidence_9: data.Mass,
+                    confidence_10: data.Nodule,
+                    confidence_11: data.PleuralThickening,
+                    confidence_12: data.Pneumonia,
+                    confidence_13: data.Pneumothorax,
                     username: username,
                     fileurl: fileurl,
-                    modeltype: "Knee",
+                    modeltype: "Chest",
                 };
 
-                const postRequest = await fetch("http://localhost:8000/save-report", {
+                const postRequest = await fetch("http://localhost:8000/save-chest-report", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(confidenceData),
                 });
-                setResult(data);
 
                 if (!postRequest.ok) {
                     throw new Error('Failed to update confidence values');
                 }
 
-                // Notify that the report has been saved
+                setResult(data);
+
+                
                 onReportSaved();
             } catch (error) {
                 console.error('There was a problem with the fetch operation:', error);
@@ -72,18 +73,16 @@ const KneeDiagnosis = ({ fileurl, onReportSaved }) => {
     }, [fileurl, username, onReportSaved]);
 
     return (
-        <div className=" flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center h-full">
             {loading ? (
-                <button className="flex flex-col items-center justify-center text-white bg-blue-600 px-3 py-2 mt-4 rounded-lg">
-                    <h1 className="text-xl font-bold">Processing...</h1>
-                </button>
+                <div className="mt-4">
+                    <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                </div>
             ) : (
-                result && (
-                    <Report fileurl={fileurl} modeltype="Knee" />
-                )
+                result && <Report fileurl={fileurl} modeltype="Chest" />
             )}
         </div>
     );
 };
 
-export default KneeDiagnosis;
+export default ChestDiagnosis;

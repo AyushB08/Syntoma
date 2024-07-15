@@ -13,13 +13,13 @@ const Report = ({ fileurl, modeltype }) => {
     useEffect(() => {
         const fetchLargestConfidence = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/get-largest-confidence?fileurl=${encodeURIComponent(fileurl)}`);
+                const response = await fetch(`http://localhost:8000/get-chest-largest-confidence?fileurl=${encodeURIComponent(fileurl)}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
                 setLargestConfidence(data.maxConfidence);
-                const confidenceInfo = convertConfInterval(data.maxConfidenceKey, "knee");
+                const confidenceInfo = convertConfInterval(data.maxConfidenceKey, "chest");
                 setConfidenceKey(confidenceInfo.text);
                 setSubtext(confidenceInfo.subtext);
                 setDate(new Date(data.created_at));
@@ -34,7 +34,9 @@ const Report = ({ fileurl, modeltype }) => {
     }, [fileurl]);
 
     if (loading) {
-        return <p className="text-blue-500">bruh</p>;
+        return <div>
+            
+        </div>
     }
 
     if (error) {

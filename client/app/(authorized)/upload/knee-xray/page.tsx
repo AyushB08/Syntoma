@@ -5,7 +5,7 @@ import { UploadDropzone } from "@uploadthing/react";
 import { useState } from 'react';
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/authContext";
-import KneeDiagnosis from "@/components/KneeDiagnosis";
+import KneeDiagnosis from "@/components/knee/KneeDiagnosis";
 import Image from "next/image";
 
 import { Montserrat } from "next/font/google";
@@ -14,8 +14,9 @@ import { Poppins } from "next/font/google";
 import { Red_Hat_Display } from "next/font/google";
 import { Open_Sans } from "next/font/google";
 import ModelDescription from '@/components/ModelDescription';
-import Card from "@/components/Card";
-import ConfidenceIntervals from "@/components/ConfidenceIntervals";
+
+import ConfidenceIntervals from "@/components/knee/ConfidenceIntervals";
+import DiagnosisSkeleton from "@/components/DiagnosisSkeleton";
 
 const roboto = Roboto({ weight: '100', style: 'normal', subsets: ['latin'] });
 const montserrat = Montserrat({ weight: "500", style: "normal", subsets: ["latin"] });
@@ -67,7 +68,7 @@ export default function UploadDnD() {
             {fileUrl ? (
                 <>
                     <div className="flex flex-row items-center justify-center space-x-4">
-
+                        
                         <KneeDiagnosis fileurl={fileUrl} onReportSaved={handleReportSaved} />
                         <ConfidenceIntervals fileurl={fileUrl} reportSaved={reportSaved} />
 
@@ -78,6 +79,7 @@ export default function UploadDnD() {
                 <>
                     <div className="w-screen h-screen flex flex-row items-center justify-center">
                         <div className="w-1/2 mx-10 flex flex-col items-center justify-center text-center  ">
+                        
                             <h1 className={`${montserrat.className} text-3xl`}>Acceptable X-Rays</h1>
                             <h2 className={`${roboto.className} text-xl`}>Please ensure your scans follow this format</h2>
                             <div className="justify-normal items-start text-start">
@@ -90,8 +92,8 @@ export default function UploadDnD() {
                             
                             
                             <div className="space-x-6 flex flex-row mt-8 items-center justify-center text-center">
-                                <Image className="rounded-xl shadow-2xl transform transition-transform duration-300 hover:scale-105" src="/images/knee-sample.png" alt="image" height={imgWidth} width={imgWidth} />
-                                <Image className="rounded-xl shadow-2xl transform transition-transform duration-300 hover:scale-105 " src="/images/knee-sample.png" alt="image" height={imgWidth} width={imgWidth} />
+                                <Image className="rounded-xl shadow-2xl transform transition-transform duration-300 hover:scale-105" src="/images/knee1.png" alt="image" height={imgWidth} width={imgWidth} />
+                                <Image className="rounded-xl shadow-2xl transform transition-transform duration-300 hover:scale-105 " src="/images/knee2.png" alt="image" height={imgWidth} width={imgWidth} />
                             </div>
 
                         </div>

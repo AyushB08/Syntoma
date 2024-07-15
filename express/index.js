@@ -148,8 +148,10 @@ app.delete("/delete-image", async (req, res) => {
     }
 });
 
+/* KNEE */
 
-app.post("/save-report", async (req, res) => {
+
+app.post("/save-knee-report", async (req, res) => {
     try {
         console.log("passed here 0");
         const { confidence_1, confidence_2, confidence_3, confidence_4, confidence_5, username, fileurl, modeltype } = req.body;
@@ -170,7 +172,7 @@ app.post("/save-report", async (req, res) => {
 });
 
 
-app.get('/get-largest-confidence', async (req, res) => {
+app.get('/get-knee-largest-confidence', async (req, res) => {
     const { fileurl } = req.query;
 
     try {
@@ -203,7 +205,7 @@ app.get('/get-largest-confidence', async (req, res) => {
     
 });
 
-app.get('/get-confidence-intervals', async (req, res) => {
+app.get('/get-knee-confidence-intervals', async (req, res) => {
     const { fileurl } = req.query;
 
     try {
@@ -221,6 +223,107 @@ app.get('/get-confidence-intervals', async (req, res) => {
             confidence_1: confidences.confidence_1,
             confidence_2: confidences.confidence_2,
             confidence_3: confidences.confidence_3,
+            created_at: confidences.created_at
+        };
+
+        res.json(response);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+/* CHEST */
+
+
+app.post("/save-chest-report", async (req, res) => {
+    try {
+        console.log("passed here 0");
+        const { confidence_1, confidence_2, confidence_3, confidence_4, confidence_5,  confidence_6,  confidence_7,  confidence_8,  confidence_9,  confidence_10,  confidence_11,  confidence_12,  confidence_13, username, fileurl, modeltype } = req.body;
+        console.log("passed here 2");
+        
+        console.log("passed here 3");
+        const newReport = await pool.query(
+            "INSERT INTO reports (confidence_1, confidence_2, confidence_3, confidence_4, confidence_5, confidence_6, confidence_7, confidence_8, confidence_9, confidence_10, confidence_11, confidence_12, confidence_13, username, fileurl, modeltype) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING *",
+            [confidence_1, confidence_2, confidence_3, confidence_4, confidence_5, confidence_6, confidence_7, confidence_8, confidence_9, confidence_10, confidence_11, confidence_12, confidence_13, username, fileurl, modeltype]
+        );
+        
+        console.log("passed here 4");
+
+        res.json(newReport.rows[0]);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "DID NOT UPDATE CHEST LOL" });
+    }
+});
+
+
+app.get('/get-chest-largest-confidence', async (req, res) => {
+    const { fileurl } = req.query;
+
+    try {
+        const result = await pool.query(
+            `SELECT confidence_1, confidence_2, confidence_3, confidence_4, confidence_5,  confidence_6,  confidence_7,  confidence_8,  confidence_9,  confidence_10,  confidence_11,  confidence_12,  confidence_13, created_at FROM reports WHERE fileurl = $1`,
+            [fileurl]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: 'Report not found' });
+        }
+
+        const confidences = result.rows[0];
+        let maxConfidence = -1;
+        let maxConfidenceKey = null;
+
+        for (const [key, value] of Object.entries(confidences)) {
+            if (key.startsWith('confidence') && value > maxConfidence) {
+                maxConfidence = value;
+                maxConfidenceKey = key;
+            }
+        }
+
+        res.json({ maxConfidence, maxConfidenceKey, created_at: confidences.created_at });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+
+    
+});
+
+app.get('/get-chest-confidence-intervals', async (req, res) => {
+    const { fileurl } = req.query;
+
+    try {
+        const result = await pool.query(
+            `SELECT confidence_1, confidence_2, confidence_3, confidence_4, confidence_5, 
+                    confidence_6, confidence_7, confidence_8, confidence_9, confidence_10, 
+                    confidence_11, confidence_12, confidence_13, created_at 
+             FROM reports 
+             WHERE fileurl = $1`,
+            [fileurl]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: 'Report not found' });
+        }
+
+        const confidences = result.rows[0];
+        // Constructing response object with all 13 confidence intervals
+        const response = {
+            confidence_1: confidences.confidence_1,
+            confidence_2: confidences.confidence_2,
+            confidence_3: confidences.confidence_3,
+            confidence_4: confidences.confidence_4,
+            confidence_5: confidences.confidence_5,
+            confidence_6: confidences.confidence_6,
+            confidence_7: confidences.confidence_7,
+            confidence_8: confidences.confidence_8,
+            confidence_9: confidences.confidence_9,
+            confidence_10: confidences.confidence_10,
+            confidence_11: confidences.confidence_11,
+            confidence_12: confidences.confidence_12,
+            confidence_13: confidences.confidence_13,
             created_at: confidences.created_at
         };
 

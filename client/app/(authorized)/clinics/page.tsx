@@ -105,11 +105,10 @@ const Clinics = () => {
       </div>
       {fetching ? (
         <div className="text-white flex items-center justify-center mt-8">
-          <svg className="animate-spin h-5 w-5 mr-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A8.004 8.004 0 014 12H0c0 3.042 1.135 5.835 3 7.969l3-2.678zM20 12c0-3.042-1.135-5.835-3-7.969l-3 2.678A8.004 8.004 0 0120 12h4zm-8 8c2.209 0 4-1.791 4-4h-4v4z"></path>
-          </svg>
-          Loading...
+          <div className="mt-4">
+              <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+          </div>
+          
         </div>
       ) : error ? (
         <p className="text-red-500">{error}</p>
