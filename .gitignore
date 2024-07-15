@@ -2,6 +2,6 @@ server/.env.local
 .env.local
 /model/nih_xrays
 /model/logs
-/flask/temp.py
-/flask/models/knee_model/
-/flask/models/xray_class_weights.best.hdf5
+/ml-backend/temp.py
+/ml-backend/models/knee_model/
+/ml-backend/models/xray_class_weights.best.hdf5
