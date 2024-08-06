@@ -35,7 +35,7 @@ def build_chest_model():
     multi_disease_model.add(Dropout(0.5))
     multi_disease_model.add(Dense(512))
     multi_disease_model.add(Dropout(0.5))
-    multi_disease_model.add(Dense(13, activation = 'sigmoid'))
+    multi_disease_model.add(Dense(14, activation = 'sigmoid'))
     multi_disease_model.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['binary_accuracy', 'mae'])
 
     return multi_disease_model
@@ -50,7 +50,7 @@ knee_model.load_weights('models/knee_model/model_weights.h5')
 knee_model.compile(optimizer='Adamax', loss='categorical_crossentropy', metrics=['accuracy'])
 
 chest_model = build_chest_model()
-chest_model.load_weights("models/xray.h5")
+chest_model.load_weights("models/chest_best_weights.h5")
 
 def preprocess_pillow_image(pil_img, knee_img_size):
     img = pil_img.resize(knee_img_size)
@@ -64,20 +64,7 @@ def predict_classes(model, pil_img, img_size):
     predictions = model.predict(img_array)
     return predictions.tolist()
 
-def get_predictions(model, X, threshold=0.5):
-    """
-    Get predictions from the model and return as a dictionary with class names and confidence scores.
-
-    Args:
-    - model: Trained Keras model for multi-label classification.
-    - X: Input data to predict (numpy array).
-    - labels: List of class names (list of strings).
-    - threshold: Confidence threshold for predictions (default 0.5).
-
-    Returns:
-    - List of dictionaries containing class name and confidence (in percentage) for each sample.
-    """
-
+def get_predictions(model, X):
     labels = [
         "Atelectasis",
         "Cardiomegaly",
@@ -88,24 +75,25 @@ def get_predictions(model, X, threshold=0.5):
         "Fibrosis",
         "Infiltration",
         "Mass",
+        "No Finding",
         "Nodule",
         "Pleural_Thickening",
         "Pneumonia",
         "Pneumothorax"
-    ]  
+    ]
 
-    # Get the predicted probabilities
     predictions = model.predict(X)
 
-    # Prepare the prediction results
     results = []
+
     for pred in predictions:
         result = {}
+        
         for i, score in enumerate(pred):
-            # Convert score to percentage
             percentage_score = score * 100
-            if percentage_score > (threshold * 100):
-                result[labels[i]] = f"{percentage_score:.2f}%"
+            
+            result[labels[i]] = f"{percentage_score:.2f}%"
+        
         results.append(result)
 
     return results
@@ -134,6 +122,8 @@ def process_knee_scan():
 
     else:
         return jsonify({"error": "invalid scan url"}), 400
+    
+# DOESNT RETURN ALL CLASSES[]
 
 @app.route("/process_chest")
 def process_chest_scan():
@@ -145,26 +135,12 @@ def process_chest_scan():
         image = Image.open(BytesIO(response.content)).convert("L")
         
         try:
-            final_result = predict_classes(chest_model, image, (128, 128))
+            final_result = get_predictions(chest_model, preprocess_pillow_image(image, (128, 128)))[0]
             
-            return jsonify({
-                "Atelectasis": final_result[0][0],
-                "Cardiomegaly": final_result[0][1],
-                "Consolidation": final_result[0][2],
-                "Edema": final_result[0][3],
-                "Effusion": final_result[0][4],
-                "Emphysema": final_result[0][5],
-                "Fibrosis": final_result[0][6],
-                "Infiltration": final_result[0][7],
-                "Mass": final_result[0][8],
-                "Nodule": final_result[0][9],
-                "Pleural Thickening": final_result[0][10],
-                "Pneumonia": final_result[0][11],
-                "Pneumothorax": final_result[0][12]
-            })
+            return jsonify(final_result)
 
         except Exception as e:
-            print(e)
+            print(f'error: {e}')
             return jsonify({"error": "invalid scan"}), 400
 
     else:
