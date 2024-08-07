@@ -25,10 +25,11 @@ const ConfidenceIntervals = ({ fileurl, reportSaved }) => {
                     { label: "Fibrosis", value: data.confidence_7 },
                     { label: "Infiltration", value: data.confidence_8 },
                     { label: "Mass", value: data.confidence_9 },
-                    { label: "Nodule", value: data.confidence_10 },
-                    { label: "Pleural Thickening", value: data.confidence_11 },
-                    { label: "Pneumonia", value: data.confidence_12 },
-                    { label: "Pneumothorax", value: data.confidence_13 },
+                    { label: "No Finding", value: data.confidence_10 },
+                    { label: "Nodule", value: data.confidence_11 },
+                    { label: "Pleural Thickening", value: data.confidence_12 },
+                    { label: "Pneumonia", value: data.confidence_13 },
+                    { label: "Pneumothorax", value: data.confidence_14 },
                 ];
 
                 setConfidences(conditionConfidences);

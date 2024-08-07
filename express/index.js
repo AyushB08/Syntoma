@@ -239,13 +239,13 @@ app.get('/get-knee-confidence-intervals', async (req, res) => {
 app.post("/save-chest-report", async (req, res) => {
     try {
         console.log("passed here 0");
-        const { confidence_1, confidence_2, confidence_3, confidence_4, confidence_5,  confidence_6,  confidence_7,  confidence_8,  confidence_9,  confidence_10,  confidence_11,  confidence_12,  confidence_13, username, fileurl, modeltype } = req.body;
+        const { confidence_1, confidence_2, confidence_3, confidence_4, confidence_5,  confidence_6,  confidence_7,  confidence_8,  confidence_9,  confidence_10,  confidence_11,  confidence_12,  confidence_13, confidence_14, username, fileurl, modeltype } = req.body;
         console.log("passed here 2");
         
         console.log("passed here 3");
         const newReport = await pool.query(
-            "INSERT INTO reports (confidence_1, confidence_2, confidence_3, confidence_4, confidence_5, confidence_6, confidence_7, confidence_8, confidence_9, confidence_10, confidence_11, confidence_12, confidence_13, username, fileurl, modeltype) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING *",
-            [confidence_1, confidence_2, confidence_3, confidence_4, confidence_5, confidence_6, confidence_7, confidence_8, confidence_9, confidence_10, confidence_11, confidence_12, confidence_13, username, fileurl, modeltype]
+            "INSERT INTO reports (confidence_1, confidence_2, confidence_3, confidence_4, confidence_5, confidence_6, confidence_7, confidence_8, confidence_9, confidence_10, confidence_11, confidence_12, confidence_13, confidence_14, username, fileurl, modeltype) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING *",
+            [confidence_1, confidence_2, confidence_3, confidence_4, confidence_5, confidence_6, confidence_7, confidence_8, confidence_9, confidence_10, confidence_11, confidence_12, confidence_13, confidence_14, username, fileurl, modeltype]
         );
         
         console.log("passed here 4");
@@ -263,7 +263,7 @@ app.get('/get-chest-largest-confidence', async (req, res) => {
 
     try {
         const result = await pool.query(
-            `SELECT confidence_1, confidence_2, confidence_3, confidence_4, confidence_5,  confidence_6,  confidence_7,  confidence_8,  confidence_9,  confidence_10,  confidence_11,  confidence_12,  confidence_13, created_at FROM reports WHERE fileurl = $1`,
+            `SELECT confidence_1, confidence_2, confidence_3, confidence_4, confidence_5,  confidence_6,  confidence_7,  confidence_8,  confidence_9,  confidence_10,  confidence_11,  confidence_12,  confidence_13, confidence_14, created_at FROM reports WHERE fileurl = $1`,
             [fileurl]
         );
 
@@ -298,7 +298,7 @@ app.get('/get-chest-confidence-intervals', async (req, res) => {
         const result = await pool.query(
             `SELECT confidence_1, confidence_2, confidence_3, confidence_4, confidence_5, 
                     confidence_6, confidence_7, confidence_8, confidence_9, confidence_10, 
-                    confidence_11, confidence_12, confidence_13, created_at 
+                    confidence_11, confidence_12, confidence_13, confidence_14, created_at 
              FROM reports 
              WHERE fileurl = $1`,
             [fileurl]
@@ -324,6 +324,7 @@ app.get('/get-chest-confidence-intervals', async (req, res) => {
             confidence_11: confidences.confidence_11,
             confidence_12: confidences.confidence_12,
             confidence_13: confidences.confidence_13,
+            confidence_14: confidences.confidence_14,
             created_at: confidences.created_at
         };
 

@@ -75,9 +75,9 @@ def get_predictions(model, X):
         "Fibrosis",
         "Infiltration",
         "Mass",
-        "No Finding",
+        "NoFinding",
         "Nodule",
-        "Pleural_Thickening",
+        "PleuralThickening",
         "Pneumonia",
         "Pneumothorax"
     ]
@@ -90,9 +90,7 @@ def get_predictions(model, X):
         result = {}
         
         for i, score in enumerate(pred):
-            percentage_score = score * 100
-            
-            result[labels[i]] = f"{percentage_score:.2f}%"
+            result[labels[i]] = f"{score:.2f}"
         
         results.append(result)
 

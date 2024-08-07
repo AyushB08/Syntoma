@@ -67,10 +67,11 @@ const ScansPage = () => {
         <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
     </div></div>;
     }
-
+    /*
     if (error) {
         return <div>Error: {error}</div>;
     }
+    */
 
     return (
         <div className="flex flex-col items-center  min-h-screen bg-gradient-to-r from-blue-900 to-blue-700 text-white">
