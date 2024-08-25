@@ -5,9 +5,9 @@ from PIL import Image
 from io import BytesIO
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from keras._tf_keras.keras.applications import EfficientNetB5
-from keras._tf_keras.keras.models import Model, Sequential
-from keras._tf_keras.keras.layers import BatchNormalization, Dense, Dropout, GlobalAveragePooling2D
+from keras._tf_keras.keras.applications import EfficientNetB5, ResNet152V2
+from keras._tf_keras.keras.models import Model, Sequential, load_model
+from keras._tf_keras.keras.layers import BatchNormalization, Dense, Dropout, GlobalAveragePooling2D, Input
 from keras import regularizers
 from keras import backend as K
 from keras._tf_keras.keras.applications.efficientnet import preprocess_input
@@ -51,6 +51,35 @@ knee_model.compile(optimizer='Adamax', loss='categorical_crossentropy', metrics=
 
 chest_model = build_chest_model()
 chest_model.load_weights("models/chest_best_weights.h5")
+
+
+base_model = ResNet152V2(
+    weights='imagenet',
+    input_shape=(224, 224, 3),
+    include_top=False)
+
+base_model.trainable = False
+
+def get_modified_resnet():
+    
+    inputs = Input(shape=(224, 224, 3))
+    
+    x = base_model(inputs)
+
+    # Head
+    x = GlobalAveragePooling2D()(x)
+    x = Dense(128, activation='relu')(x)
+    x = Dropout(0.1)(x)
+    
+    output = Dense(2, activation='sigmoid')(x)
+    
+    model = Model(inputs=[inputs], outputs=output)
+    
+    return model
+
+chest_p = get_modified_resnet()
+chest_p.load_weights("models/transfer_weights.h5")
+
 
 def preprocess_pillow_image(pil_img, knee_img_size):
     img = pil_img.resize(knee_img_size)
@@ -121,8 +150,6 @@ def process_knee_scan():
     else:
         return jsonify({"error": "invalid scan url"}), 400
     
-# DOESNT RETURN ALL CLASSES[]
-
 @app.route("/process_chest")
 def process_chest_scan():
     scan_url = request.args.get("url")
@@ -139,6 +166,29 @@ def process_chest_scan():
 
         except Exception as e:
             print(f'error: {e}')
+            return jsonify({"error": "invalid scan"}), 400
+
+    else:
+        return jsonify({"error": "invalid scan url"}), 400
+    
+
+@app.route("/process_chest_p")
+def process_chest_p():
+    scan_url = request.args.get("url")
+    decoded_url = urllib.parse.unquote(scan_url)
+
+    response = requests.get(decoded_url)
+    if response.status_code == 200:
+        image = Image.open(BytesIO(response.content)).convert("RGB")
+        
+        try:
+            final_result = predict_classes(chest_p, image, (224, 224))
+            print(final_result)
+
+            return jsonify({"healthy": round(final_result[0][0], 2), "pneumonia": round(final_result[0][1], 2)})
+
+        except Exception as e:
+            print(e)
             return jsonify({"error": "invalid scan"}), 400
 
     else:
