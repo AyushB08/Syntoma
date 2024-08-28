@@ -6,3 +6,4 @@ server/.env.local
 /ml-backend/models/knee_model/
 /ml-backend/env/
 /ml-backend/models/xray_class_weights.best.hdf5
+/ml-backend/models/transfer_weights.h5

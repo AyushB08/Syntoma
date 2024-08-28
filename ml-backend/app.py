@@ -58,10 +58,12 @@ base_model = ResNet152V2(
     input_shape=(224, 224, 3),
     include_top=False)
 
-base_model.trainable = False
+base_model.trainable = True
+
+for layer in base_model.layers[:-13]:
+    layer.trainable = False
 
 def get_modified_resnet():
-    
     inputs = Input(shape=(224, 224, 3))
     
     x = base_model(inputs)
@@ -71,7 +73,7 @@ def get_modified_resnet():
     x = Dense(128, activation='relu')(x)
     x = Dropout(0.1)(x)
     
-    output = Dense(2, activation='sigmoid')(x)
+    output = Dense(1, activation='sigmoid')(x)
     
     model = Model(inputs=[inputs], outputs=output)
     
@@ -185,7 +187,7 @@ def process_chest_p():
             final_result = predict_classes(chest_p, image, (224, 224))
             print(final_result)
 
-            return jsonify({"healthy": round(final_result[0][0], 2), "pneumonia": round(final_result[0][1], 2)})
+            return jsonify({"normal": round(1 - final_result[0][0], 2), "pneumonia": round(final_result[0][0], 2)})
 
         except Exception as e:
             print(e)
