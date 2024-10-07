@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-white text-sm mb-4 md:mb-0">
-            &copy; 2024 Vital. All rights reserved.
+            &copy; 2024 Syntoma. All rights reserved.
           </p>
           <nav>
             <ul className="flex space-x-4">
