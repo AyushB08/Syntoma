@@ -39,6 +39,13 @@ const convertConfInterval = (interval, modeltype) => {
             return { text: "Pneumothorax", subtext: "Our model detects signs of Pneumothorax in this X-ray image. Further medical evaluation is recommended." };
         }
         return { text: "error", subtext: "" };
+    } else if (modeltype === "chestp") {
+        if (interval === "confidence_1") {
+            return { text: "Healthy", subtext: "Our model does not detect any significant abnormalities in this X-ray image. Further medical evaluation is recommended." };
+        } else if (interval === "confidence_2") {
+            return { text: "Pneumonia", subtext: "Our model detects signs of Pneumonia in this X-ray image. Further medical evaluation is recommended." };
+        } 
+        return { text: "error", subtext: "" };
     }
   };
   

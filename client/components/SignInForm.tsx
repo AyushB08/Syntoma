@@ -38,12 +38,13 @@ export default function SignInForm() {
       const data = await response.json();
 
       if (response.ok) {
+        router.push("/profile");
         console.log("USER: " + data.username);
         if (authContext) {
           console.log(data);
           authContext.login({ email, username: data.username });
         }
-        router.push("/profile");
+        
       } else {
         console.error("Sign-in failed:", data.error);
         setShowPopup(true); // Show the popup for invalid credentials

@@ -335,7 +335,94 @@ app.get('/get-chest-confidence-intervals', async (req, res) => {
     }
 });
 
+/* CHEST P */
 
+
+app.post("/save-chest-p-report", async (req, res) => {
+    try {
+        console.log("passed here 0");
+        const { confidence_1, confidence_2, username, fileurl, modeltype } = req.body;
+        console.log("passed here 2");
+        
+        console.log("passed here 3");
+        const newReport = await pool.query(
+            "INSERT INTO reports (confidence_1, confidence_2,username, fileurl, modeltype) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            [confidence_1, confidence_2,username, fileurl, modeltype]
+        );
+        
+        console.log("passed here 4");
+
+        res.json(newReport.rows[0]);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "DID NOT UPDATE CHEST LOL" });
+    }
+});
+
+
+app.get('/get-chest-p-largest-confidence', async (req, res) => {
+    const { fileurl } = req.query;
+
+    try {
+        const result = await pool.query(
+            `SELECT confidence_1, confidence_2, created_at FROM reports WHERE fileurl = $1`,
+            [fileurl]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: 'Report not found' });
+        }
+
+        const confidences = result.rows[0];
+        let maxConfidence = -1;
+        let maxConfidenceKey = null;
+
+        for (const [key, value] of Object.entries(confidences)) {
+            if (key.startsWith('confidence') && value > maxConfidence) {
+                maxConfidence = value;
+                maxConfidenceKey = key;
+            }
+        }
+
+        res.json({ maxConfidence, maxConfidenceKey, created_at: confidences.created_at });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+
+    
+});
+
+app.get('/get-chest-p-confidence-intervals', async (req, res) => {
+    const { fileurl } = req.query;
+
+    try {
+        const result = await pool.query(
+            `SELECT confidence_1, confidence_2,  created_at 
+             FROM reports 
+             WHERE fileurl = $1`,
+            [fileurl]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: 'Report not found' });
+        }
+
+        const confidences = result.rows[0];
+   
+        const response = {
+            confidence_1: confidences.confidence_1,
+            confidence_2: confidences.confidence_2,
+            
+            created_at: confidences.created_at
+        };
+
+        res.json(response);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 
 app.get('/get-scan-info', async (req, res) => {

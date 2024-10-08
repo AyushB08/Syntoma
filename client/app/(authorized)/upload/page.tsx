@@ -19,8 +19,7 @@ const poppins = Poppins({ weight: "800", style: "normal", subsets: ["latin"] });
 const redHatDisplay = Red_Hat_Display({ weight: '400', style: 'normal', subsets: ['latin'] });
 const openSans = Open_Sans({ weight: '400', style: 'normal', subsets: ['latin'] });
 
-import Card
- from '@/components/Card';
+
 export default function UploadDnD() {
     
     return (
@@ -42,15 +41,17 @@ export default function UploadDnD() {
 
                     <ModelDescription link="/upload/knee-xray" src="/images/knee1.png" text="Knee Osteoarthritis Severity Detection"/>
                     <ModelDescription link="/upload/chest-xray" src="/images/chest1.png" text="Chest X-Ray Disease Detection"/>
+                    <ModelDescription link="/upload/chest-p-xray" src="/images/knee-sample.png" text="Pneumonia Detection"/>
 
                     </div>
                     
 
-                
+                {/*
                     <div className="flex flex-row items-center justify-center space-x-10">
                     <ModelDescription link="/upload/knee-xray" src="/images/knee-sample.png" text="Coming Soon"/>
                     <ModelDescription link="/upload/knee-xray" src="/images/knee-sample.png" text="Coming Soon"/>
                     </div>
+                    */}
                     
 
                     

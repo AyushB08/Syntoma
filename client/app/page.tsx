@@ -83,7 +83,7 @@ export default function Component() {
         </section>
         
         <section className="bg-muted py-12 md:py-16">
-          <div className="container mx-auto grid grid-cols-1 gap-8 px-4 md:grid-cols-2 md:px-6 lg:grid-cols-3 lg:gap-12">
+          <div className="container mx-auto grid grid-cols-1 gap-8 px-4 md:grid-cols-3 md:px-6 lg:grid-cols-3 lg:gap-12">
             <div className="space-y-2">
               <UploadIcon className="h-8 w-8 text-primary" />
               <h3 className="text-xl font-semibold">Upload X-Ray Scans</h3>
