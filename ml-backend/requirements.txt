@@ -4,3 +4,5 @@ requests==2.31.0
 numpy
 keras-nightly
 flask_cors
+fastapi
+uvicorn
