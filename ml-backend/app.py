@@ -1,4 +1,3 @@
-import random
 import requests
 import urllib.parse
 from PIL import Image
@@ -43,14 +42,14 @@ def build_chest_model():
 knee_img_size = (224, 224)
 knee_shape = (knee_img_size[0], knee_img_size[1], 3)
 knee_classes = 3
-knee_weights = 'models/knee_model/efficientnetb5_notop.h5'
+knee_weights = 'models/knee.h5'
 
 knee_model = build_knee_model(3, knee_shape, knee_weights)
 knee_model.load_weights('models/knee_model/model_weights.h5')
 knee_model.compile(optimizer='Adamax', loss='categorical_crossentropy', metrics=['accuracy'])
 
 chest_model = build_chest_model()
-chest_model.load_weights("models/chest_best_weights.h5")
+chest_model.load_weights("models/chest.h5")
 
 
 base_model = ResNet152V2(
@@ -80,7 +79,7 @@ def get_modified_resnet():
     return model
 
 chest_p = get_modified_resnet()
-chest_p.load_weights("models/transfer_weights.h5")
+chest_p.load_weights("models/pneumonia.h5")
 
 
 def preprocess_pillow_image(pil_img, knee_img_size):
