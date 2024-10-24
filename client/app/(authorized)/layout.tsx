@@ -18,7 +18,7 @@ export default function AuthorizedLayout({
         <Script src="https://files.bpcontent.cloud/2024/10/07/00/20241007001812-DRS2S6MV.js" />
         <Navbar />
         {children}
-        <Footer/>
+        {/*<Footer/>*/}
       </div>
     );
   }

@@ -7,3 +7,4 @@ server/.env.local
 /ml-backend/env/
 /ml-backend/models/xray_class_weights.best.hdf5
 /ml-backend/models/transfer_weights.h5
+/project/

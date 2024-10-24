@@ -55,7 +55,7 @@ const Clinics = () => {
 
     if (!window.google) {
       const googleMapsScript = document.createElement('script');
-      googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAQaxa9Risi64Ovct2U8QKC-6u5R5ot3LQ&libraries=places`;
+      googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyADjlRmAXafozXjbWbWc-v76Jk_ndHmCUI&libraries=places`;
       googleMapsScript.async = true;
       googleMapsScript.defer = true;
       window.document.body.appendChild(googleMapsScript);

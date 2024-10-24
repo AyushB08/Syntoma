@@ -38,16 +38,14 @@ export default function SignInForm() {
       const data = await response.json();
 
       if (response.ok) {
-        router.push("/profile");
-        console.log("USER: " + data.username);
         if (authContext) {
-          console.log(data);
+          // Ensure login context is updated before redirecting
           authContext.login({ email, username: data.username });
         }
-        
+        router.push("/profile"); // Redirect after login
       } else {
         console.error("Sign-in failed:", data.error);
-        setShowPopup(true); // Show the popup for invalid credentials
+        setShowPopup(true);
         setTimeout(() => setShowPopup(false), 2000); // Hide the popup after 2 seconds
       }
     } catch (error) {
@@ -58,38 +56,15 @@ export default function SignInForm() {
   };
 
   if (loading) {
-    return ( 
-      <AuthLoadingScreen/>
-    )
+    return <AuthLoadingScreen />;
   }
 
   return (
     <>
-      <style jsx global>{`
-        input:-webkit-autofill {
-          -webkit-box-shadow: 0 0 0 1000px white inset;
-          -webkit-text-fill-color: black;
-        }
-
-        input:-webkit-autofill:focus {
-          -webkit-box-shadow: 0 0 0 1000px white inset;
-          -webkit-text-fill-color: black;
-        }
-
-        input:-webkit-autofill:hover {
-          -webkit-box-shadow: 0 0 0 1000px white inset;
-          -webkit-text-fill-color: black;
-        }
-
-        input:-webkit-autofill:active {
-          -webkit-box-shadow: 0 0 0 1000px white inset;
-          -webkit-text-fill-color: black;
-        }
-      `}</style>
       <form className="w-1/2 h-auto rounded-lg bg-white p-6 shadow-lg" onSubmit={onSubmitForm}>
         <div className="flex flex-row items-center justify-center space-x-1 mb-4">
-          <LogoIcon fill="#000000" width="25px" height="25px" className=""/>
-          <Link href="/" className={`${montserrat.className} text-blue-700 tracking-tighter text-4xl k `}>Syntoma</Link>
+          <LogoIcon fill="#000000" width="25px" height="25px" />
+          <Link href="/" className={`${montserrat.className} text-blue-700 tracking-tighter text-4xl`}>Syntoma</Link>
         </div>
         
         <div className="mb-4">

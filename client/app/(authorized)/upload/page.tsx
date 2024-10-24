@@ -41,7 +41,7 @@ export default function UploadDnD() {
 
                     <ModelDescription link="/upload/knee-xray" src="/images/knee1.png" text="Knee Osteoarthritis Severity Detection"/>
                     <ModelDescription link="/upload/chest-xray" src="/images/chest1.png" text="Chest X-Ray Disease Detection"/>
-                    <ModelDescription link="/upload/chest-p-xray" src="/images/knee-sample.png" text="Pneumonia Detection"/>
+                    <ModelDescription link="/upload/chest-p-xray" src="/images/chest4.jpeg" text="Pneumonia Detection"/>
 
                     </div>
                     

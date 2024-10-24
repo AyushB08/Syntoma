@@ -46,7 +46,7 @@ const Profile = () => {
           </div>
           
           <h2 className={`${roboto.className} text-white text-xs mx-24 text-center`}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed eos deserunt explicabo, eum minus repudiandae enim excepturi totam. Labore ipsam tempora, suscipit ea sit placeat error dolores quia velit numquam! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe repudiandae eius hic cumque reprehenderit itaque illo dolores explicabo vero, et corporis magnam debitis at. Debitis inventore quaerat veritatis veniam quod!
+            Start by clicking the upload button to receive a diagnosis on your medical imaging. You may view your past scans in the "Scans" page. In addition, you may find clinics near you in the "Clinics" page. If you have any questions, please open our AI chatbot in the bottom right. We hope our services help!
           </h2>
           
           <div className="flex space-x-4 items-center justify-center">
