@@ -2,7 +2,7 @@
 
 ## Pre-requisites 
 1. Create a Uploadthing account.
-2. Create a Neon.tech account, create a PostgresSQL DB.
+2. Create a Neon.tech account, create a PostgreSQL DB.
 3. Make a .env.local file in root directory and add your Uploadthing key to this field "UPLOADTHING_SECRET".
 
 ## Running Frontend
