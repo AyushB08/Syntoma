@@ -1,5 +1,9 @@
 # Syntoma
 
+## What is Syntoma?
+According to the NIH, currently more than 500 million patients have respiratory diseases. In the US, more than 30 million adults have knee osteoarthritis. In addition, diagnosis from doctors can range from 48 hours to a week after an X-ray and typical costs for X-ray diagnosis can range from a costly $100 to $1000. Websites like TalkToCody and
+Diagnose Me offer online diagnose options for medical images, but are expensive and utilize human examination taking a few days to weeks for results. Overall, the healthcare industry faces significant challenges in diagnosing medical conditions, particularly with X-rays, where the expensive and time-consuming process disproportionately affects geographically underserved communities and minority populations. To remedy this, we built Syntoma, an accessible website that provides quick and accurate early stage diagnosis of pneumonia, 14 chest diseases, and knee osteoarthritis within seconds, while also helping users find clinics and medical information.
+
 ## Pre-requisites 
 1. Create a Uploadthing account.
 2. Create a Neon.tech account, create a PostgresSQL DB.
